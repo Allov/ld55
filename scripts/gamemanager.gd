@@ -1,22 +1,15 @@
+# gamemanager.gd est un singleton appelé par main.gd et géré dans Autoload
 extends Node
 
-# Singleton instance
 var instance: GameManager
-
-# Attributes
 var score: int = 0
 var lives: int = 3
 var game_speed: float = 1.0
-var game_state: String = "playing" # Options: "playing", "paused", "game_over"
+var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
 
-func _ready():
-	instance = self
-	# Ensure there is only one instance of the game manager
-	if instance and instance != self:
-		queue_free()
-		return
-	# Initialize game state
-	start_game()
+func _input(event):
+	if event.is_action_pressed("pause_game"):
+		toggle_pause()
 
 func start_game():
 	score = 0
@@ -25,10 +18,16 @@ func start_game():
 	game_state = "playing"
 	print("Game started")
 
+func toggle_pause():
+	if game_state == "paused":
+		resume_game()
+	else:
+		pause_game()
+
 func pause_game():
 	if game_state != "paused":
 		game_state = "paused"
-		get_tree().paused = true
+		## DiningArea.paused = true
 		print("Game paused")
 
 func resume_game():
@@ -57,9 +56,3 @@ func update_game_speed():
 	elif score > 500:
 		game_speed = 2.0
 	print("Game speed updated to: ", game_speed)
-
-func toggle_pause():
-	if game_state == "paused":
-		resume_game()
-	else:
-		pause_game()
