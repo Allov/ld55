@@ -1,11 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbd17j7b260e4"]
+[gd_scene load_steps=3 format=3 uid="uid://bbd17j7b260e4"]
 
 [ext_resource type="Script" path="res://scripts/diningroom.gd" id="1_kfvfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ibq5u"]
+size = Vector2(20, 37.5)
 
 [node name="Dinerroom" type="Node2D"]
 script = ExtResource("1_kfvfe")
 
 [node name="Customer_spawn_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 12.0
+
+[node name="DoorArea" type="Area2D" parent="."]
+position = Vector2(52, 205)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
+position = Vector2(0, 0.75)
+shape = SubResource("RectangleShape2D_ibq5u")
+
+[node name="ColorRect" type="ColorRect" parent="DoorArea/CollisionShape2D"]
+offset_left = -10.0
+offset_top = -19.0
+offset_right = 10.0
+offset_bottom = 19.0
+color = Color(0.901961, 0.752941, 0.384314, 0.682353)
 
 [connection signal="timeout" from="Customer_spawn_timer" to="." method="_on_customer_spawn_timer_timeout"]
