@@ -32,7 +32,8 @@ func _process(_delta):
 				interact_with_object(object_in_range)
 		else:
 			clear_object_in_hand()
-
+	
+	# A cooking station is in range, try to progress it with the holding action
 	if cooking_station_in_range != null and Input.is_action_pressed("action"):
 		cooking_station_in_range.progress()
 

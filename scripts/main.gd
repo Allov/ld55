@@ -1,6 +1,6 @@
 extends Node2D
 
-var restaurant_scene = preload("res://scenes/fridge.tscn")
+var restaurant_scene = preload("res://scenes/restaurant.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
