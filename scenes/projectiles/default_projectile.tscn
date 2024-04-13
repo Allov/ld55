@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnldsm0202ioy"]
+
+[ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="1_0k5yn"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_3xkd6"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_wap7x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk2mt"]
+size = Vector2(133, 132)
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_3xkd6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0k5yn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rk2mt")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("2_wap7x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_rk2mt")
+
+[connection signal="target_hit" from="Hitbox" to="." method="_on_hitbox_target_hit"]

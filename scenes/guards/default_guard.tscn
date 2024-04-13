@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6djtlfpv5wcp"]
+
+[ext_resource type="Script" path="res://scripts/guard.gd" id="1_edka2"]
+[ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="2_ksudt"]
+[ext_resource type="Script" path="res://components/health.gd" id="3_aiym8"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="4_rukfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wyab"]
+size = Vector2(133, 132)
+
+[node name="Guard" type="CharacterBody2D"]
+script = ExtResource("1_edka2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ksudt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6wyab")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_aiym8")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_rukfq")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_6wyab")
+
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

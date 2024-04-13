@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://byphuqq7bbdpu"]
+
+[ext_resource type="PackedScene" uid="uid://c6djtlfpv5wcp" path="res://scenes/guards/default_guard.tscn" id="1_ggsk1"]
+[ext_resource type="Texture2D" uid="uid://xevj41aijxgi" path="res://scenes/guards/dog.png" id="2_0ts63"]
+
+[node name="Guard" instance=ExtResource("1_ggsk1")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-1.90735e-06, -2.32458e-06)
+scale = Vector2(0.283871, 0.253465)
+texture = ExtResource("2_0ts63")
