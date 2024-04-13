@@ -7,7 +7,6 @@ var customer_spawn_timer
 
 func _ready():
 	customer_spawn_timer = $Customer_spawn_timer 
-	customer_spawn_timer.connect("timeout", Callable(self, "_on_customer_spawn_timer_timeout"))
 	customer_spawn_timer.start()
 
 func _on_customer_spawn_timer_timeout():
