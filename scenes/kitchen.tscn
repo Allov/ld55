@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chen1l7qpby23" path="res://scenes/cooking_station.tscn" id="4_l2430"]
 [ext_resource type="Texture2D" uid="uid://cahsr4ooxnf3e" path="res://assets/cooking_station_b.png" id="5_cl2gs"]
 [ext_resource type="Texture2D" uid="uid://b6nawrjt620yv" path="res://assets/cooking_station_c.png" id="6_5wowo"]
-[ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
+[ext_resource type="PackedScene" path="res://scenes/plate.tscn" id="7_e4vjx"]
 [ext_resource type="Script" path="res://scripts/plate.gd" id="8_tc260"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_koymp"]
