@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://mrvvcikcibes"]
 
+[ext_resource type="Script" path="res://scripts/restaurant.gd" id="1_7v6ba"]
 [ext_resource type="PackedScene" uid="uid://b4ck1ajh7elbm" path="res://scenes/player.tscn" id="1_55q5r"]
-[ext_resource type="Script" path="res://scenes/restaurant.gd" id="1_76qua"]
 [ext_resource type="PackedScene" uid="uid://c83c7gs5uxov5" path="res://scenes/kitchen.tscn" id="2_ocdqh"]
 [ext_resource type="PackedScene" uid="uid://d3ijvg2j6cpda" path="res://scenes/fridge.tscn" id="3_gfjln"]
 [ext_resource type="PackedScene" uid="uid://bbd17j7b260e4" path="res://scenes/diningroom.tscn" id="4_vyinh"]
@@ -31,7 +31,7 @@ sources/2 = SubResource("TileSetAtlasSource_x5ulp")
 pattern_0 = SubResource("TileMapPattern_0yai2")
 
 [node name="Restaurant" type="Node2D"]
-script = ExtResource("1_76qua")
+script = ExtResource("1_7v6ba")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
