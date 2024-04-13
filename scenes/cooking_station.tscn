@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://chen1l7qpby23"]
+[gd_scene load_steps=4 format=3 uid="uid://bg4n83hsgsegj"]
 
 [ext_resource type="Script" path="res://scripts/cooking_station.gd" id="1_kbi6u"]
 [ext_resource type="Texture2D" uid="uid://boeamx8m5l11o" path="res://assets/cooking_station_a.png" id="2_chwvh"]

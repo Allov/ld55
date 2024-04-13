@@ -16,23 +16,31 @@ func start(_position, _target):
 
 func _ready():
 	velocity = speed * 5 * Vector2.RIGHT.rotated(rotation)
-	$Timer.connect("timeout", _on_timeout_complete)
-	$Timer.start()
+	$Lifespan.connect("timeout", _on_timeout_complete)
+	$Lifespan.start()
 
 func _physics_process(delta: float) -> void:
-	acceleration += seek()
-	velocity += acceleration * delta
-	velocity = velocity.limit_length(speed)
-	rotation = velocity.angle()
-	position += velocity * delta
-	look_at(global_position + velocity)
+	if target != null:
+		acceleration += seek()
+		velocity += acceleration * delta
+		velocity = velocity.limit_length(speed)
+		rotation = velocity.angle()
+		position += velocity * delta
+		look_at(global_position + velocity)
+	else:
+		queue_free()
 
 func seek():
 	var steer = Vector2.ZERO
-	if target:
+	
+	if target != null:
 		var desired = (target.position - position).normalized() * speed
 		steer = (desired - velocity).normalized() * steer_force
-		return steer
+
+	return steer
 
 func _on_timeout_complete():
+	queue_free()
+
+func _on_hitbox_area_entered(_area):
 	queue_free()

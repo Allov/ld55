@@ -25,5 +25,7 @@ script = ExtResource("2_wap7x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_kstbg")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Lifespan" type="Timer" parent="."]
 wait_time = 5.0
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

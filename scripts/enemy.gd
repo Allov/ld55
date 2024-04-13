@@ -4,34 +4,37 @@ extends CharacterBody2D
 @export var projectile_scene: PackedScene
 @export var detection_area: Area2D
 @export_range(1, 10) var attack_delay: float = 2 
+# À changer
 @onready var player = get_node("/root/Fridge/Player")
 
 var timer;
 var can_shoot = false;
-var collision_array = []
+var guard = null
 
 func _ready():
-	$Timer.connect("timeout", _on_timeout_complete)
-	$Timer.start()
+	add_to_group("enemies")
+	$AttackDelay.connect("timeout", _on_timeout_complete)
+	$AttackDelay.start()
 
 func _process(delta):
-	if(can_shoot):
-		if(collision_array.is_empty()):
-			for body in detection_area.get_overlapping_bodies():
+	if can_shoot:
+		if guard == null:
+			for body in $DetectionArea.get_overlapping_bodies():
 				if body.is_in_group("guards"):
-					collision_array.push_back(body)
+					guard = body
+					break
 				
-			if(collision_array.is_empty()):
+			if(guard == null):
 				shoot_projectile(player)
 		else:
-			shoot_projectile(collision_array[0])
+			shoot_projectile(guard)
 
 func shoot_projectile(target: CharacterBody2D):
 	var projectile = projectile_scene.instantiate()
 	get_parent().add_child(projectile)
 	projectile.start(global_position, target)
 	can_shoot = false
-	$Timer.start()
+	$AttackDelay.start()
 
 func _on_timeout_complete() -> void:
 	can_shoot = true
