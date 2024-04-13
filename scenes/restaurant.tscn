@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ck1ajh7elbm" path="res://scenes/player.tscn" id="1_55q5r"]
 [ext_resource type="PackedScene" uid="uid://c83c7gs5uxov5" path="res://scenes/kitchen.tscn" id="2_ocdqh"]
 [ext_resource type="PackedScene" uid="uid://d3ijvg2j6cpda" path="res://scenes/fridge.tscn" id="3_gfjln"]
-[ext_resource type="PackedScene" path="res://scenes/diningroom.tscn" id="4_vyinh"]
+[ext_resource type="PackedScene" uid="uid://bbd17j7b260e4" path="res://scenes/diningroom.tscn" id="4_vyinh"]
 [ext_resource type="Texture2D" uid="uid://2yvxyqu8aede" path="res://assets/floor_1.png" id="5_dk3mb"]
 [ext_resource type="Texture2D" uid="uid://dy6xb3ga7lyqm" path="res://assets/floor_2.png" id="6_s4j6m"]
 [ext_resource type="Texture2D" uid="uid://cq6ulrn5ihbx1" path="res://assets/wall.png" id="7_7a7nr"]
