@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbptqom5s0ss6"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_oio50"]
+[ext_resource type="Texture2D" uid="uid://dl8rfjtf3elos" path="res://assets/ingredient_a.png" id="2_u5k4c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svs4t"]
+
+[node name="Ingredient" type="RigidBody2D"]
+position = Vector2(48, 48)
+collision_layer = 2
+collision_mask = 3
+continuous_cd = 2
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp = 5.0
+script = ExtResource("1_oio50")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_u5k4c")
+
+[node name="TransformedSprite" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_svs4t")

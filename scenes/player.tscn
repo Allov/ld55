@@ -1,20 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ck1ajh7elbm"]
+[gd_scene load_steps=6 format=3 uid="uid://b4ck1ajh7elbm"]
 
-[ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="1_prvac"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qmujo"]
+[ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="2_kghhj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s0nsr"]
-radius = 16.0312
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l56ht"]
+radius = 18.0278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
+radius = 19.105
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_qmujo")
+DASH_VELOCITY = 500.0
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_prvac")
+texture = ExtResource("2_kghhj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s0nsr")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_l56ht")
+
+[node name="CookArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CookArea"]
+shape = SubResource("CircleShape2D_gglyw")
