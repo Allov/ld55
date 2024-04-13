@@ -8,8 +8,9 @@
 size = Vector2(16, 16)
 
 [node name="Plate" type="RigidBody2D"]
-collision_layer = 8
+collision_layer = 2
 collision_mask = 11
+linear_damp = 5.0
 script = ExtResource("1_ii8y3")
 
 [node name="Empty" type="Sprite2D" parent="."]

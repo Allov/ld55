@@ -9,7 +9,6 @@ var node_to_follow: Node2D = null
 var just_dropped = false
 var dropped_velocity = Vector2.ZERO	
 var transformed = false
-var cooking_station: CookingStation = null
 var cooking = false
 var cooked = false
 var meal = false
@@ -30,16 +29,16 @@ func stop_cooking():
 
 func follow(node: Node2D):
 	node_to_follow = node
-	cooking_station = null
 	apply_central_force(Vector2.ZERO)
+	print("Following ", node)
 
 func stop_following():
 	just_dropped = true
-	cooking_station = null
-	if node_to_follow.velocity:
+	if "velocity" in node_to_follow and node_to_follow.velocity:
 		dropped_velocity = node_to_follow.velocity
 	else:
 		dropped_velocity = Vector2.ZERO
+	print("Stopped following: ", node_to_follow)
 	node_to_follow = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
