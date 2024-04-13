@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4fc8vn2pg73"]
+
+[ext_resource type="PackedScene" uid="uid://2rfcretcyro7" path="res://scenes/projectiles/default_projectile.tscn" id="1_d3frh"]
+[ext_resource type="Texture2D" uid="uid://ds2tovxar4sg5" path="res://scenes/projectiles/cat.png" id="2_ytnbl"]
+
+[node name="Projectile" instance=ExtResource("1_d3frh")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_ytnbl")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.5, 0)

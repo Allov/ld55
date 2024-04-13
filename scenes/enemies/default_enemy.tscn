@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd8ldwyy5jgt5"]
+[gd_scene load_steps=7 format=3 uid="uid://dd8ldwyy5jgt5"]
 
 [ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="1_6c5dh"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_037e2"]
@@ -8,8 +8,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_puqex"]
 size = Vector2(133, 132)
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jpgry"]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("detection_area")]
 script = ExtResource("1_037e2")
+detection_area = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6c5dh")
@@ -27,5 +30,14 @@ health = NodePath("../Health")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_puqex")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(50, 50)
+shape = SubResource("CircleShape2D_jpgry")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

@@ -1,10 +1,8 @@
 class_name Health
 extends Node
 
-
 signal health_changed(diff: int)
 signal health_depleted()
-
 
 @export_range(1, 10) var max_health: int = 5 : set = set_max_health, get = get_max_health
 
@@ -19,8 +17,7 @@ func set_max_health(value: int):
 	var clamped_value = clamp(value, 1, 10)
 	
 	if not clamped_value == max_health:
-		var diff = clamped_value - max_health
-		max_health = value
+		max_health = clamped_value
 	
 	if max_health < health:
 		health = max_health
