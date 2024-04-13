@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c83c7gs5uxov5"]
+[gd_scene load_steps=10 format=3 uid="uid://c83c7gs5uxov5"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredient.tscn" id="1_g506r"]
 [ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_3m1d7"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://chen1l7qpby23" path="res://scenes/cooking_station.tscn" id="4_l2430"]
 [ext_resource type="Texture2D" uid="uid://cahsr4ooxnf3e" path="res://assets/cooking_station_b.png" id="5_cl2gs"]
 [ext_resource type="Texture2D" uid="uid://b6nawrjt620yv" path="res://assets/cooking_station_c.png" id="6_5wowo"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3ic5"]
-size = Vector2(32, 32)
+[ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
+[ext_resource type="Script" path="res://scripts/plate.gd" id="8_tc260"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_koymp"]
 size = Vector2(32, 32)
@@ -22,6 +21,7 @@ accepts = "green"
 [node name="CookingStationB" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(320, 96)
 accepts = "blue"
+interaction_type = 2
 
 [node name="Sprite" parent="CookingStationB" index="0"]
 texture = ExtResource("5_cl2gs")
@@ -29,40 +29,41 @@ texture = ExtResource("5_cl2gs")
 [node name="CookingStationC" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(320, 144)
 accepts = "red"
+interaction_type = 1
 
 [node name="Sprite" parent="CookingStationC" index="0"]
 texture = ExtResource("6_5wowo")
 
 [node name="IngredientA" parent="." instance=ExtResource("1_g506r")]
 kind = "green"
+cooked_kind = "cooked_green"
 
 [node name="IngredientB" parent="." instance=ExtResource("1_g506r")]
 position = Vector2(48, 96)
 scale = Vector2(0.994968, 1)
 kind = "blue"
+cooked_kind = "cooked_blue"
 
-[node name="Sprite" parent="IngredientB" index="0"]
+[node name="Raw" parent="IngredientB" index="0"]
+texture = ExtResource("2_3m1d7")
+
+[node name="Cooked" parent="IngredientB" index="1"]
 texture = ExtResource("2_3m1d7")
 
 [node name="IngredientC" parent="." instance=ExtResource("1_g506r")]
 position = Vector2(48, 144)
 kind = "red"
+cooked_kind = "cooked_red"
 
-[node name="Sprite" parent="IngredientC" index="0"]
+[node name="Raw" parent="IngredientC" index="0"]
 texture = ExtResource("3_3js2c")
 
-[node name="Plate" type="Area2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(240, 176)
+[node name="Cooked" parent="IngredientC" index="1"]
+texture = ExtResource("3_3js2c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Plate"]
-position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_u3ic5")
-
-[node name="Label" type="Label" parent="Plate"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Plate"
+[node name="Plate" parent="." instance=ExtResource("7_e4vjx")]
+position = Vector2(264, 176)
+script = ExtResource("8_tc260")
 
 [node name="SummoningSpot" type="Area2D" parent="."]
 modulate = Color(0, 0, 0, 1)
