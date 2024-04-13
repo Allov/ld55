@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://mrvvcikcibes"]
+[gd_scene load_steps=5 format=3 uid="uid://mrvvcikcibes"]
 
 [ext_resource type="PackedScene" uid="uid://b4ck1ajh7elbm" path="res://scenes/player.tscn" id="1_55q5r"]
+[ext_resource type="PackedScene" uid="uid://c83c7gs5uxov5" path="res://scenes/kitchen.tscn" id="2_ocdqh"]
+[ext_resource type="PackedScene" uid="uid://d3ijvg2j6cpda" path="res://scenes/fridge.tscn" id="3_gfjln"]
+[ext_resource type="PackedScene" uid="uid://dmatlvnbmdc7t" path="res://scenes/diningroom.tscn" id="4_vyinh"]
 
 [node name="Restaurant" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_55q5r")]
 position = Vector2(104, 54)
+
+[node name="Kitchen" parent="." instance=ExtResource("2_ocdqh")]
+
+[node name="Fridge" parent="." instance=ExtResource("3_gfjln")]
+position = Vector2(0, -216)
+
+[node name="DiningRoom" parent="." instance=ExtResource("4_vyinh")]
+position = Vector2(0, 216)
