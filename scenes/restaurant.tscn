@@ -49,7 +49,7 @@ layer_0/tile_data = PackedInt32Array(-851969, 2, 0, -917504, 2, 0, -917503, 2, 0
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
-polygon = PackedVector2Array(0, -216, 384, -216, 384, 432, 0, 432, 0, -216, -64, -216, -64, 496, 448, 496, 448, -280, -64, -280, -64, -216)
+polygon = PackedVector2Array(0, -208, 384, -208, 384, 432, 0, 432, 0, -208, -64, -208, -64, 496, 448, 496, 448, -280, -64, -280, -64, -208)
 
 [node name="Polygon2D" type="Polygon2D" parent="Walls"]
 visible = false
