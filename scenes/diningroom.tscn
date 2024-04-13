@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bbd17j7b260e4"]
+[gd_scene load_steps=2 format=3 uid="uid://bbd17j7b260e4"]
+
+[ext_resource type="Script" path="res://scripts/diningroom.gd" id="1_kfvfe"]
 
 [node name="Dinerroom" type="Node2D"]
+script = ExtResource("1_kfvfe")
+
+[node name="Customer_spawn_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Customer_spawn_timer" to="." method="_on_customer_spawn_timer_timeout"]
