@@ -1,4 +1,4 @@
-extends Node  # or whatever your root node type is
+extends Node2D  # or whatever your root node type is
 
 # On affiche un debug-display avec la touche '9'. Toutes les infos de GameManager s'y trouvent.
 var debug_visible: bool = false
