@@ -1,45 +1,66 @@
 extends CharacterBody2D
 class_name Player
 
-@export var MAX_SPEED = 300.0
+@export var MAX_SPEED = 200.0
 @export var ACCELERATION = 10.0
-@export var DASH_VELOCITY = 600.0
+@export var DASH_VELOCITY = 400.0
 @export var DASH_COOLDOWN = 1.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var dash_cooldown = 0.0
 var speed = 0.0
-var item_in_hand: Item = null
-var item_in_range: Item = null
+var object_in_hand: Node2D = null
 var cooking_station_in_range: CookingStation = null
 
 func _ready():
-	$GrabArea.connect("body_entered", _on_GrabArea_body_entered)
-	$GrabArea.connect("body_exited", _on_GrabArea_body_exited)
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
 	$CookArea.connect("body_exited", _on_CookArea_body_exited)
 
 func _process(_delta):
-	if item_in_hand == null and Input.is_action_just_pressed("action"):
-		if item_in_range == null:
-			var items_in_range = $GrabArea.get_overlapping_bodies()
-			for item in items_in_range:
-				if item is Item:
-					item_in_range = item
-					break
+	var object_in_range = null
+	if Input.is_action_just_pressed("action"):
+		object_in_range = get_object_in_range()
 
-		item_in_hand = item_in_range
-		item_in_range = null
-		if item_in_hand != null:
-			item_in_hand.grab(self)
-	elif item_in_hand != null and Input.is_action_just_pressed("action"):
-		if item_in_hand != null and cooking_station_in_range != null:
-			print("Cooking", item_in_hand.kind, "at", cooking_station_in_range.name)
-			item_in_hand.cook(cooking_station_in_range)
+		if object_in_range:
+			# If the player is not holding an object and an object is in range, pick it up.
+			if object_in_range is CookingStation and object_in_hand == null:
+				object_in_range.progress()
+			if object_in_hand == null:
+				pick_up_object(object_in_range)
+
+			# Player is holding an object
+			elif object_in_hand != null:
+				interact_with_object(object_in_range)
 		else:
-			item_in_hand.drop()
-			item_in_hand = null
+			clear_object_in_hand()
 
+	if cooking_station_in_range != null and Input.is_action_pressed("action"):
+		cooking_station_in_range.progress()
+
+func get_object_in_range():
+	var objects_in_range = $GrabArea.get_overlapping_bodies()
+	for object in objects_in_range:
+		if object != object_in_hand and (object is Plate or object is CookingStation or (object is Ingredient and object.cooking == false)):
+			return object
+
+func pick_up_object(object_in_range):
+	# Object has been found, pick it up.
+	if object_in_range is Plate or (object_in_range is Ingredient and object_in_range.cooking == false):
+		print("Object picked up ", object_in_range)
+		object_in_hand = object_in_range
+		object_in_hand.follow(self)
+
+func interact_with_object(object_in_range):
+	# A cooking station is in range, try and cook the object.
+	if object_in_range is CookingStation and object_in_hand is Ingredient and object_in_hand.cooked == false:
+		if object_in_range.cook(object_in_hand):
+			object_in_hand = null
+
+	# A plate is in range, try and add the ingredient to the plate.
+	elif object_in_range is Plate and object_in_hand is Ingredient and object_in_hand.cooked:
+		if object_in_range.add_ingredient(object_in_hand.kind):
+			object_in_hand.stop_following()
+			object_in_hand.queue_free()
+			object_in_hand = null
 
 func _physics_process(delta):
 	var current_direction = velocity.normalized()
@@ -66,24 +87,23 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY)
 		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY)
 
-	move_and_slide()
+	var collided = move_and_slide()
+	if collided:
+		velocity = velocity.lerp(Vector2.ZERO, .1)
 
-func _on_GrabArea_body_entered(body):
-	if item_in_range == null:
-		item_in_range = body
+func clear_object_in_hand():
+	if object_in_hand != null:
+		object_in_hand.stop_following()
 
-func _on_GrabArea_body_exited(_body):
-	if item_in_range != null:
-		clear_item_in_hand()
-
+	object_in_hand = null
+	
 func _on_CookArea_body_entered(body):
-	var station = body as CookingStation
-	if item_in_hand != null and station != null and station.accepts == item_in_hand.kind:
+	if body is CookingStation:
 		cooking_station_in_range = body
+		print("In range!")
 
-func _on_CookArea_body_exited(_body):
-	cooking_station_in_range = null
+func _on_CookArea_body_exited(body):
+	if body is CookingStation:
+		cooking_station_in_range = null
+		print("Not in range!")
 
-func clear_item_in_hand():
-	item_in_hand = null
-	item_in_range = null
