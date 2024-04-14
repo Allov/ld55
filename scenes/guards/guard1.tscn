@@ -15,7 +15,7 @@ position = Vector2(-9.53676e-07, -2.32458e-06)
 texture = ExtResource("3_kns5d")
 
 [node name="Health" parent="." index="2"]
-max_health = 3
+max_health = 20
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 0)
