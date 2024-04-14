@@ -1,3 +1,4 @@
+#Plate script
 extends RigidBody2D
 class_name Plate
 
@@ -20,8 +21,14 @@ func add_ingredient(kind: String):
 		return false
 
 func update_meal():
-	current_meal = Recipebook.get_meal(ingredients)
+	current_meal = Recipebook.get_meal_info(ingredients)
 	print("Updated meal to: ", current_meal)
+	update_meal_sprite()
+	
+func update_meal_sprite():
+	var meal_info = Recipebook.get_meal_info(ingredients)
+	if meal_info:
+		$WithIngredients.texture = load(meal_info.sprite)  # Update the sprite texture
 
 func follow(node: Node2D):
 	node_to_follow = node

@@ -31,7 +31,7 @@ offset = Vector2(-0.325, 0)
 shape = SubResource("CapsuleShape2D_feahs")
 
 [node name="PatienceTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
@@ -50,10 +50,12 @@ show_percentage = false
 [node name="OrderDisplay" type="Node2D" parent="."]
 position = Vector2(9.01, -15.375)
 
-[node name="Empty" type="Sprite2D" parent="OrderDisplay"]
+[node name="Bubble" type="Sprite2D" parent="OrderDisplay"]
+position = Vector2(3.99, -0.625001)
+scale = Vector2(1.35, 1.46406)
 texture = ExtResource("3_k57ty")
 
-[node name="Ordering" type="Sprite2D" parent="OrderDisplay"]
-texture = ExtResource("3_k57ty")
+[node name="MealOrder" type="Sprite2D" parent="OrderDisplay"]
+position = Vector2(4.55, -2.115)
 
 [connection signal="timeout" from="PatienceTimer" to="." method="_on_patience_timer_timeout"]

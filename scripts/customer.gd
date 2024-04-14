@@ -1,3 +1,4 @@
+#Customer script
 extends Area2D
 
 # Member variables
@@ -24,8 +25,12 @@ func leave():
 
 func set_order(new_order):
 	order = new_order
-	print("Order set to: " + order)
-	# Future implementation: Update customer's thought bubble or similar UI element here
+	var order_details = Recipebook.recipes[order]
+	var order_texture_path = order_details["sprite"]
+	var order_texture = load(order_texture_path)
+	$OrderDisplay/MealOrder.texture = order_texture
+	var meal_name = order_details["name"]
+	print("Order set to: " + meal_name)
 
 func receive_order(meal):
 	if meal == null:
