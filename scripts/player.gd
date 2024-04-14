@@ -12,6 +12,7 @@ var object_in_hand: Node2D = null
 var cooking_station_in_range: CookingStation = null
 var summoning_guard_station_in_range: SummoningGuardStation = null
 var summoning_enemy_station_in_range: SummoningEnemyStation = null
+var plate_station_in_range: PlateStation = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
@@ -28,9 +29,10 @@ func _process(_delta):
 			# If the player is not holding an object and an object is in range, pick it up.
 			if object_in_range is CookingStation and object_in_hand == null:
 				object_in_range.progress()
+			if object_in_range is PlateStation:
+				object_in_range.spawn_plate()
 			if object_in_hand == null:
 				pick_up_object(object_in_range)
-
 			# Player is holding an object
 			elif object_in_hand != null:
 				interact_with_object(object_in_range)
@@ -53,7 +55,7 @@ func _process(_delta):
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
 	for object in objects_in_range:
-		if object != object_in_hand and (object is Plate or object is CookingStation or (object is Ingredient and object.cooking == false)):
+		if object != object_in_hand and (object is Plate or object is CookingStation or object is PlateStation or (object is Ingredient and object.cooking == false)):
 			return object
 			
 func pick_up_object(object_in_range):
@@ -123,12 +125,16 @@ func _on_CookArea_body_entered(body):
 	if body is CookingStation:
 		cooking_station_in_range = body
 		print("In range!")
+	elif body is PlateStation:
+		plate_station_in_range = body
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
 		cooking_station_in_range = null
 		print("Not in range!")
-		
+	elif body is PlateStation:
+		cooking_station_in_range = null
+
 func _on_CookArea_area_entered(area):
 	if area is SummoningGuardStation:
 		summoning_guard_station_in_range = area
