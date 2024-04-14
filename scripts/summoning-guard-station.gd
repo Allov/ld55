@@ -44,7 +44,7 @@ func _ready():
 		GameManager.summon_points[i] = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _free_summon_point(guard):
