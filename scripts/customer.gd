@@ -1,22 +1,20 @@
-#Customer script
 extends Area2D
 class_name Customer
 
 # Member variables
 var order = null
-var initial_patience = 10.0  # Initial waiting time in seconds
+var initial_patience
 @onready var patience_timer = $PatienceTimer
 @onready var patience_bar = $PatienceBar
 
 func _ready():
-	patience_timer.wait_time = initial_patience
-	patience_timer.start()
+	initial_patience = patience_timer.wait_time;
 
 func _process(_delta):
 	# Update the patience bar based on the remaining time
 	var time_left = patience_timer.time_left
-	var patience_level = time_left / initial_patience
-	patience_bar.value = patience_level
+	patience_bar.value = time_left / initial_patience
+	print("Time left: " + str(time_left))
 
 func leave():
 	print("Customer is leaving due to impatience or order fulfillment.")
@@ -49,5 +47,5 @@ func receive_plate(plate: Plate) -> bool:
 		return true
 
 func _on_patience_timer_timeout():
-	GameManager.lose_life();
+	GameManager.lose_life()
 	leave()
