@@ -39,12 +39,7 @@ func follow(node: Node2D):
 func stop_following():
 	just_dropped = true
 	if "velocity" in node_to_follow and node_to_follow.velocity:
-		var player = get_parent().get_node("Player")
-		if player != null:
-			dropped_velocity = node_to_follow.velocity.normalized() * player.MAX_SPEED
-		else:
-			# Ingredient ajouté par la scène Kitchen
-			dropped_velocity = node_to_follow.velocity.normalized() * 200.0
+		dropped_velocity = node_to_follow.velocity.normalized() * GameManager.get_player().MAX_SPEED
 	else:
 		dropped_velocity = Vector2.ZERO
 	print("Stopped following: ", node_to_follow)
@@ -64,6 +59,6 @@ func _integrate_forces(state):
 	
 	if spawning_from_enemy:
 		state.transform = Transform2D(0.0, moveVector)
-		state.apply_central_impulse(Vector2(rng.randf_range(-1000.0, 1000.0), rng.randf_range(1000.0, 2000.0)))
+		state.apply_central_impulse(Vector2(rng.randf_range(-1000.0, 1000.0), rng.randf_range(750.0, 1500.0)))
 		spawning_from_enemy = false
 	
