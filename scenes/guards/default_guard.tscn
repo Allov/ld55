@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6djtlfpv5wcp"]
+[gd_scene load_steps=10 format=3 uid="uid://c6djtlfpv5wcp"]
 
 [ext_resource type="Script" path="res://scripts/guard.gd" id="1_edka2"]
-[ext_resource type="PackedScene" uid="uid://c8qonasjt8p0s" path="res://assets/poof.tscn" id="2_5y0a6"]
+[ext_resource type="PackedScene" path="res://assets/poof.tscn" id="2_5y0a6"]
 [ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="2_ksudt"]
 [ext_resource type="Script" path="res://components/health.gd" id="3_aiym8"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="4_rukfq"]
+[ext_resource type="AudioStream" uid="uid://ccp6a7tnrb2p" path="res://assets/sfx/guard_spawn.wav" id="6_1ihlp"]
+[ext_resource type="AudioStream" uid="uid://ctq0rkl1yjyrh" path="res://assets/sfx/guard_die.wav" id="7_1rv6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wyab"]
 size = Vector2(133, 132)
@@ -49,5 +51,15 @@ shape = SubResource("CircleShape2D_kg4qb")
 [node name="AttackDelay" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_1ihlp")
+bus = &"SFX"
+
+[node name="DieAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1rv6h")
+volume_db = -2.0
+bus = &"SFX"
+
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+[connection signal="finished" from="DieAudio" to="." method="_on_die_audio_finished"]

@@ -14,6 +14,7 @@ func _ready():
 	add_to_group("guards")
 	$AttackDelay.connect("timeout", _on_timeout_complete)
 	$AttackDelay.start()
+	$SpawnAudio.play()
 
 func _process(_delta):
 	if can_shoot and not is_dead:
@@ -24,8 +25,6 @@ func _process(_delta):
 					break
 		else:
 			shoot_projectile(enemy)
-	elif is_dead:
-		queue_free()
 
 func shoot_projectile(target: CharacterBody2D):
 	var projectile = projectile_scene.instantiate()
@@ -40,3 +39,8 @@ func _on_timeout_complete() -> void:
 func _on_health_health_depleted():
 	is_dead = true
 	health_depleted.emit(self)
+	$DieAudio.play()
+	$Sprite2D.visible = false
+
+func _on_die_audio_finished():
+	queue_free()
