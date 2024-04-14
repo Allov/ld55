@@ -9,7 +9,7 @@ var dropped_velocity = Vector2.ZERO
 
 func add_ingredient(kind: String):
 	if ingredients.size() < 3 and ingredients.has(kind) == false:
-		ingredients.append(kind)
+		ingredients.append(kind) ## Lien avec les recettes ici
 		$Empty.visible = false
 		$WithIngredients.visible = true
 		return true
