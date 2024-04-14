@@ -16,6 +16,27 @@
 
 [node name="Kitchen" type="Node2D"]
 
+[node name="Summoning-circle" type="Sprite2D" parent="."]
+position = Vector2(184, -80)
+texture = ExtResource("10_b7unu")
+
+[node name="SummonTarget1" type="Node2D" parent="Summoning-circle"]
+position = Vector2(-62, 43)
+
+[node name="SummonTarget2" type="Node2D" parent="Summoning-circle"]
+position = Vector2(63, 53)
+
+[node name="SummonTarget3" type="Node2D" parent="Summoning-circle"]
+position = Vector2(81, -48)
+
+[node name="SummonTarget4" type="Node2D" parent="Summoning-circle"]
+position = Vector2(3, -86)
+
+[node name="SummonTarget5" type="Node2D" parent="Summoning-circle"]
+position = Vector2(-67, -55)
+
+[node name="SummonEnemyTarget" type="Node2D" parent="Summoning-circle"]
+
 [node name="CookingStationA" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(347, 132)
 accepts = "A"
@@ -74,7 +95,7 @@ position = Vector2(143, 188)
 
 [node name="SummonGuardArea" parent="." instance=ExtResource("8_dcn42")]
 position = Vector2(81, 18)
-spawn_points = Array[NodePath]([NodePath("../Summoning-circle/SummonTarget1"), NodePath("../Summoning-circle/SummonTarget2"), NodePath("../Summoning-circle/SummonTarget3"), NodePath("../Summoning-circle/SummonTarget4"), NodePath("../Summoning-circle/SummonTarget5")])
+spawn_points = Array[NodePath]([NodePath("../Summoning-circle/SummonTarget2"), NodePath("../Summoning-circle/SummonTarget3"), NodePath("../Summoning-circle/SummonTarget4"), NodePath("../Summoning-circle/SummonTarget5"), NodePath("../Summoning-circle/SummonTarget1")])
 
 [node name="SummonEnemyArea" parent="." instance=ExtResource("9_85o4o")]
 position = Vector2(187, 41)
@@ -85,27 +106,6 @@ enemy_scene = ExtResource("11_hmfi8")
 position = Vector2(295, -2)
 spawn_point = NodePath("../Summoning-circle/SummonEnemyTarget")
 enemy_scene = ExtResource("11_1v3y2")
-
-[node name="Summoning-circle" type="Sprite2D" parent="."]
-position = Vector2(184, -80)
-texture = ExtResource("10_b7unu")
-
-[node name="SummonTarget1" type="Node2D" parent="Summoning-circle"]
-position = Vector2(-62, 43)
-
-[node name="SummonTarget2" type="Node2D" parent="Summoning-circle"]
-position = Vector2(63, 53)
-
-[node name="SummonTarget3" type="Node2D" parent="Summoning-circle"]
-position = Vector2(81, -48)
-
-[node name="SummonTarget4" type="Node2D" parent="Summoning-circle"]
-position = Vector2(3, -86)
-
-[node name="SummonTarget5" type="Node2D" parent="Summoning-circle"]
-position = Vector2(-67, -55)
-
-[node name="SummonEnemyTarget" type="Node2D" parent="Summoning-circle"]
 
 [node name="PlateStation" parent="." instance=ExtResource("12_m7t8w")]
 position = Vector2(171, 184)

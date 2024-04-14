@@ -3,10 +3,12 @@ class_name Player
 
 @export var MAX_SPEED = 200.0
 @export var ACCELERATION = 10.0
-@export var DASH_VELOCITY = 400.0
+@export var DASH_VELOCITY = 425.0
 @export var DASH_COOLDOWN = 1.0
+@export var dash_duration = 0.06
 
 var dash_cooldown = 0.0
+var dash_timer = 0.0
 var speed = 0.0
 var object_in_hand: Node2D = null
 var cooking_station_in_range: CookingStation = null
@@ -49,6 +51,9 @@ func _process(_delta):
 		object_in_range_interactable = true
 
 	$ActionInRange.visible = object_in_range_interactable or summoning_enemy_station_in_range or summoning_guard_station_in_range
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		$Camera2D.shake()
 
 	if object_in_hand:
 		return
@@ -62,7 +67,7 @@ func _process(_delta):
 
 	if summoning_enemy_station_in_range and Input.is_action_pressed("action"):
 		summoning_enemy_station_in_range.progress()
-
+	
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
 	for object in objects_in_range:
@@ -109,10 +114,15 @@ func _physics_process(delta):
 
 	dash_cooldown = max(0, dash_cooldown - delta)
 	
-	if Input.is_action_just_pressed("dash") and dash_cooldown <= 0:
+	if Input.is_action_just_pressed("dash") and dash_cooldown <= 0 and velocity.length() > 0:
 		dash_cooldown = DASH_COOLDOWN
-		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY * 0.5)
-		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY * 0.5)
+		dash_timer = dash_duration
+	
+	if dash_cooldown > 0 and dash_timer > 0 and (vertical_direction or horizontal_direction):
+		dash_timer = dash_timer - delta
+		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY)
+		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY)
+		
 
 	var collided = move_and_slide()
 	if collided:
