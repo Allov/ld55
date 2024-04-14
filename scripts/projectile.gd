@@ -11,11 +11,9 @@ var target
 func start(_position, _target):
 	global_position = _position
 	rotation += randf_range(-0.09, 0.09)
-	velocity = transform.x * speed
 	target = _target
 
 func _ready():
-	velocity = speed * 5 * Vector2.RIGHT.rotated(rotation)
 	$Lifespan.connect("timeout", _on_timeout_complete)
 	$Lifespan.start()
 
@@ -34,7 +32,7 @@ func seek():
 	var steer = Vector2.ZERO
 	
 	if target != null:
-		var desired = (target.position - position).normalized() * speed
+		var desired = (target.global_position - global_position).normalized() * speed
 		steer = (desired - velocity).normalized() * steer_force
 
 	return steer
@@ -43,4 +41,5 @@ func _on_timeout_complete():
 	queue_free()
 
 func _on_hitbox_area_entered(_area):
-	queue_free()
+	if _area is Hurtbox:
+		queue_free()
