@@ -5,16 +5,23 @@ var ingredients = []
 var node_to_follow: Node2D = null
 var just_dropped = false
 var dropped_velocity = Vector2.ZERO
+var current_meal = ""
 
 func add_ingredient(kind: String):
-	if ingredients.size() < 3 and ingredients.has(kind) == false:
+	if ingredients.size() < 3 and not ingredients.has(kind):
 		ingredients.append(kind)
+		print("Ingredients on plate: ", ingredients)
+		update_meal()
 		$Empty.visible = false
 		$WithIngredients.visible = true
 		return true
 	else:
-		print("Plate is full")
+		print("Plate is full or ingredient already added to this plate")
 		return false
+
+func update_meal():
+	current_meal = Recipebook.get_meal(ingredients)
+	print("Updated meal to: ", current_meal)
 
 func follow(node: Node2D):
 	node_to_follow = node
@@ -22,7 +29,7 @@ func follow(node: Node2D):
 
 func stop_following():
 	just_dropped = true
-	if node_to_follow.velocity:
+	if node_to_follow and node_to_follow.velocity:
 		dropped_velocity = node_to_follow.velocity
 	else:
 		dropped_velocity = Vector2.ZERO
@@ -30,7 +37,7 @@ func stop_following():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass # Initialization code here.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

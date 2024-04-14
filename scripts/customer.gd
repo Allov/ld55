@@ -33,6 +33,8 @@ func receive_order(meal):
 		return false
 	elif meal != order:
 		print("Wrong meal provided. Customer wanted: " + order + ", but got: " + meal)
+		GameManager.lose_life();
+		leave()
 		return false
 	else:
 		print("Correct meal provided! Customer is satisfied.")
