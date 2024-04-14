@@ -19,7 +19,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
-[node name="Customer" type="Area2D"]
+[node name="Customer" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_lu0dh")
 

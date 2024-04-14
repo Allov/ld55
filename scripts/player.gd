@@ -180,6 +180,9 @@ func _on_CookArea_body_entered(body):
 		plate_station_in_range = body
 	elif body is Trash:
 		thrash_in_range = body
+	if body is Customer:
+		customer_in_range = body
+		print("Customer entered proximity: ", body.name)
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
@@ -189,6 +192,9 @@ func _on_CookArea_body_exited(body):
 		cooking_station_in_range = null
 	elif body is Trash:
 		thrash_in_range = null
+	if body is Customer:
+		customer_in_range = null
+		print("Customer exited proximity: ", body.name)
 
 func _on_CookArea_area_entered(area):
 	if area is SummoningGuardStation:
@@ -196,20 +202,8 @@ func _on_CookArea_area_entered(area):
 		
 	if area is SummoningEnemyStation:
 		summoning_enemy_station_in_range = area
-	if area is CookingStation:
-		cooking_station_in_range = area
-		print("In range!")
-	elif area is Customer:
-		customer_in_range = area
-		print("Customer entered proximity: ", area.name)
 
 func _on_CookArea_area_exited(area):
-	if area is CookingStation:
-		cooking_station_in_range = null
-		print("Not in range!")
-	elif area is Customer:
-		customer_in_range = null
-		print("Customer exited proximity: ", area.name)
 	if area is SummoningGuardStation:
 		area.reset_progress()
 		summoning_guard_station_in_range = null
