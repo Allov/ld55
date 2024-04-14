@@ -45,6 +45,7 @@ func _process(_delta):
 				object_in_range.spawn_plate()
 			if object_in_range is Trash and object_in_hand != null:
 				object_in_hand.queue_free()
+				object_in_range.use()
 				object_in_hand = null
 			if object_in_hand == null:
 				pick_up_object(object_in_range)
