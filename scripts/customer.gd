@@ -1,22 +1,37 @@
 #Customer script
-extends Area2D
+extends CharacterBody2D
 class_name Customer
+
+@export var spawn_box = [32, 216+32, 284-32, 108-32]
+@export var speed = 50.0
 
 # Member variables
 var order = null
 var initial_patience = 10.0  # Initial waiting time in seconds
+var target_position
 @onready var patience_timer = $PatienceTimer
 @onready var patience_bar = $PatienceBar
 
 func _ready():
 	patience_timer.wait_time = initial_patience
 	patience_timer.start()
+	
+	target_position = Vector2(randi_range(spawn_box[0], spawn_box[0] + spawn_box[2]), randi_range(spawn_box[1], spawn_box[1] + spawn_box[3]))
 
 func _process(_delta):
 	# Update the patience bar based on the remaining time
 	var time_left = patience_timer.time_left
 	var patience_level = time_left / initial_patience
 	patience_bar.value = patience_level
+	
+func _physics_process(delta):
+	var direction = target_position - global_position
+	
+	if direction.length() < 5.0:
+		return
+	
+	velocity = direction.normalized() * speed
+	move_and_slide()
 
 func leave():
 	print("Customer is leaving due to impatience or order fulfillment.")
