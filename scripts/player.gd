@@ -33,7 +33,7 @@ func _process(_delta):
 		object_in_range = get_object_in_range()
 		
 		if customer_in_range and object_in_hand and object_in_hand is Plate:
-			print("Entrer dans interraction Plate/customer", object_in_range)
+			print("Entrer dans interraction Plate/customer")
 			interact_with_object(customer_in_range)
 		
 
@@ -98,7 +98,9 @@ func interact_with_object(object_in_range):
 	if object_in_range is Customer and object_in_hand and object_in_hand is Plate:
 		if object_in_range.receive_plate(object_in_hand):
 			# If the meal is accepted, clear the plate from player's hand
-			clear_object_in_hand()
+			object_in_hand.stop_following()
+			object_in_hand.queue_free()
+			object_in_hand = null
 			return  # Return here to stop further processing
 		else:
 			# Handle case where the meal is not accepted
@@ -115,14 +117,6 @@ func interact_with_object(object_in_range):
 			object_in_hand.stop_following()
 			object_in_hand.queue_free()
 			object_in_hand = null
-		# If a customer is in range and the player is holding a plate, try to give the plate to the customer.
-	elif customer_in_range and object_in_hand and object_in_hand is Plate:
-		if customer_in_range.receive_plate(object_in_hand):
-			# If the meal is accepted, clear the plate from player's hand
-			clear_object_in_hand()
-		else:
-			# Handle case where the meal is not accepted
-			print("Meal delivery failed. Check the order.")
 
 func _physics_process(delta):
 	var current_direction = velocity.normalized()
