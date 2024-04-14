@@ -17,6 +17,7 @@ var customer_in_range: Customer = null
 var summoning_enemy_station_in_range: SummoningEnemyStation = null
 var plate_station_in_range: PlateStation = null
 var thrash_in_range: Trash = null
+var tracking_cooking_station = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
@@ -61,6 +62,21 @@ func _process(_delta):
 		object_in_range_interactable = object_in_hand == null or (object_in_hand is Ingredient and object_in_hand.cooked)
 	elif object_in_range:
 		object_in_range_interactable = true
+		
+	if object_in_hand is Ingredient and object_in_hand.cooked == false:
+		var cooking_stations = get_tree().get_nodes_in_group("cooking_station")
+		for station in cooking_stations:
+			if station.accepts == object_in_hand.kind:
+				station.toggle_indicator(true)
+				tracking_cooking_station = station
+	elif tracking_cooking_station != null:
+		tracking_cooking_station.toggle_indicator(false)
+	
+	var ping_plates = object_in_hand is Ingredient and object_in_hand.cooked == true
+	var plates = get_tree().get_nodes_in_group("plate")
+	for plate in plates:
+		plate.toggle_indicator(ping_plates)
+		
 
 	$ActionInRange.visible = object_in_range_interactable or summoning_enemy_station_in_range or summoning_guard_station_in_range
 	

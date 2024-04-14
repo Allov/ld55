@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8j7nxq3otkw6"]
+[gd_scene load_steps=3 format=3 uid="uid://b8j7nxq3otkw6"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="1_qqr52"]
+[ext_resource type="Texture2D" uid="uid://cgk6xqofxc11" path="res://assets/ingredient_a_cooked.png" id="2_ti1ys"]
 
 [node name="Ingredient" instance=ExtResource("1_qqr52")]
 kind = "B"
 cooked_kind = "cooked_B"
+
+[node name="Cooked" parent="." index="1"]
+texture = ExtResource("2_ti1ys")

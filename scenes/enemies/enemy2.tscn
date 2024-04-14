@@ -17,9 +17,6 @@ ingredients_array = Array[PackedScene]([ExtResource("3_lxo1u"), ExtResource("4_n
 position = Vector2(0, 0.999995)
 texture = ExtResource("5_nduq5")
 
-[node name="Health" parent="." index="3"]
-max_health = 500
-
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_ikquk")

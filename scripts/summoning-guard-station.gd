@@ -5,6 +5,9 @@ class_name SummoningGuardStation
 @export var guard_scene: PackedScene = null
 @export var progress_value: float = 0.5
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func summon_guard():
 	var index = -1
 	for point in GameManager.summon_points:
