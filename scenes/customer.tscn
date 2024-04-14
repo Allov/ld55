@@ -30,7 +30,12 @@ offset = Vector2(-0.325, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_feahs")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="PatienceTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="PatienceBar" type="ProgressBar" parent="."]
 offset_left = -8.0
 offset_top = 9.0
 offset_right = 8.0
@@ -38,9 +43,8 @@ offset_bottom = 13.0
 theme_override_styles/background = SubResource("StyleBoxFlat_dy38a")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nx3u8")
 max_value = 1.0
-step = 1.0
+step = 0.1
 value = 1.0
-fill_mode = 1
 show_percentage = false
 
 [node name="OrderDisplay" type="Node2D" parent="."]
@@ -51,3 +55,5 @@ texture = ExtResource("3_k57ty")
 
 [node name="Ordering" type="Sprite2D" parent="OrderDisplay"]
 texture = ExtResource("3_k57ty")
+
+[connection signal="timeout" from="PatienceTimer" to="." method="_on_patience_timer_timeout"]
