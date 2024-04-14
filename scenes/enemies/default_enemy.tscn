@@ -53,9 +53,12 @@ wait_time = 2.0
 [node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7bh6h")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="DieAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_3vpr2")
+volume_db = -2.0
+bus = &"SFX"
 
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="finished" from="DieAudio" to="." method="_on_die_audio_finished"]
