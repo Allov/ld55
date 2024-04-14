@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c83c7gs5uxov5"]
+[gd_scene load_steps=15 format=3 uid="uid://c83c7gs5uxov5"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="1_g506r"]
 [ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_3m1d7"]
@@ -8,11 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://b6nawrjt620yv" path="res://assets/cooking_station_c.png" id="6_5wowo"]
 [ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
 [ext_resource type="PackedScene" uid="uid://c47xynln6fcmm" path="res://scenes/summon_guard_station.tscn" id="8_dcn42"]
-[ext_resource type="PackedScene" uid="uid://b8ecdp4g5tyep" path="res://scenes/summon_enemy_station.tscn" id="9_85o4o"]
+[ext_resource type="PackedScene" path="res://scenes/summon_enemy_station.tscn" id="9_85o4o"]
 [ext_resource type="Texture2D" uid="uid://cihsr10066tvu" path="res://assets/summoning-circle.png" id="10_b7unu"]
 [ext_resource type="PackedScene" uid="uid://bi6qg2adhbgrs" path="res://scenes/enemies/enemy2.tscn" id="11_1v3y2"]
 [ext_resource type="PackedScene" uid="uid://dax2c82gpwk0b" path="res://scenes/enemies/enemy1.tscn" id="11_hmfi8"]
-[ext_resource type="PackedScene" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
+[ext_resource type="PackedScene" uid="uid://cy4gh8iuagoac" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
+[ext_resource type="PackedScene" uid="uid://du8ixkjq3nhy" path="res://scenes/trash.tscn" id="14_iitpv"]
 
 [node name="Kitchen" type="Node2D"]
 
@@ -109,6 +110,9 @@ position = Vector2(-67, -55)
 
 [node name="PlateStation" parent="." instance=ExtResource("12_m7t8w")]
 position = Vector2(171, 184)
+
+[node name="Trash" parent="." instance=ExtResource("14_iitpv")]
+position = Vector2(82, 192)
 
 [editable path="CookingStationB"]
 [editable path="CookingStationC"]
