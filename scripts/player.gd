@@ -98,8 +98,8 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("dash") and dash_cooldown <= 0:
 		dash_cooldown = DASH_COOLDOWN
-		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY)
-		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY)
+		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY * 0.5)
+		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY * 0.5)
 
 	var collided = move_and_slide()
 	if collided:

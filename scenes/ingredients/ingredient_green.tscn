@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="1_qqr52"]
 
 [node name="Ingredient" instance=ExtResource("1_qqr52")]
-kind = "green"
-cooked_kind = "cooked_green"
+kind = "B"
+cooked_kind = "cooked_B"
