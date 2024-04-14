@@ -59,7 +59,6 @@ func _integrate_forces(state):
 	
 	if spawning_from_enemy:
 		state.transform = Transform2D(0.0, moveVector)
-		state.apply_central_impulse(Vector2(rng.randf_range(-2000.0, 2000.0), rng.randf_range(-2000.0, 2000.0)))
-		state.apply_torque(rng.randf_range(-2000.0, 2000.0))
+		state.apply_central_impulse(Vector2(rng.randf_range(-1000.0, 1000.0), rng.randf_range(1000.0, 2000.0)))
 		spawning_from_enemy = false
 	
