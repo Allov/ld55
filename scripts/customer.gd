@@ -14,8 +14,8 @@ var target_position
 
 func _ready():
 	initial_patience = patience_timer.wait_time;
-	
 	target_position = Vector2(randi_range(spawn_box[0], spawn_box[0] + spawn_box[2]), randi_range(spawn_box[1], spawn_box[1] + spawn_box[3]))
+	$SpawnAudio.play()
 
 func _process(_delta):
 	# Update the patience bar based on the remaining time
@@ -52,7 +52,10 @@ func receive_plate(plate: Plate) -> bool:
 	var meal = plate.current_meal
 	if meal == order["name"]:  # Compare with the name in the order dictionary
 		print("Correct meal provided! Customer is satisfied.")
-		leave()  # Assuming the customer leaves after receiving the correct meal
+		$PayAudio.play()
+		$Sprite2D.visible = false
+		$OrderDisplay.visible = false
+		$PatienceBar.visible = false
 		return true
 	else:
 		print("Wrong meal provided. Customer wanted: " + order["name"] + ", but got: " + meal)
@@ -63,4 +66,7 @@ func receive_plate(plate: Plate) -> bool:
 func _on_patience_timer_timeout():
 	print("Customer patience reached 0 and is now leaving.")
 	GameManager.lose_life()
+	leave()
+
+func _on_pay_audio_finished():
 	leave()
