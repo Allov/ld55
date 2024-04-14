@@ -31,11 +31,8 @@ func spawn_customer():
 	var meal_name = Recipebook.recipes[random_order]["name"]
 	print("New customer spawned with order: " + meal_name)
 
-func _process(delta):
-	pass
-
-func remove_customer(customer):
-	if customer in customers:
-		customers.erase(customer)
+func remove_customer(_customer):
+	if _customer in customers:
+		customers.erase(_customer)
 		if len(customers) < 3 and not customer_spawn_timer.is_stopped():
 			customer_spawn_timer.start()

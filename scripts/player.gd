@@ -23,6 +23,7 @@ func _ready():
 	$CookArea.connect("body_exited", _on_CookArea_body_exited)
 	$CookArea.connect("area_entered", _on_CookArea_area_entered)
 	$CookArea.connect("area_exited", _on_CookArea_area_exited)
+	GameManager.set_player(self)
 
 func _process(_delta):
 	var object_in_range = null

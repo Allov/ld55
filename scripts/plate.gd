@@ -52,12 +52,7 @@ func follow(node: Node2D):
 func stop_following():
 	just_dropped = true
 	if node_to_follow and node_to_follow.velocity:
-		var player = get_parent().get_node("Player")
-		if player != null:
-			dropped_velocity = node_to_follow.velocity.normalized() * player.MAX_SPEED
-		else:
-			# Plate ajouté par la scène Kitchen
-			dropped_velocity = node_to_follow.velocity.normalized() * 200.0
+		dropped_velocity = node_to_follow.velocity.normalized() * GameManager.get_player().MAX_SPEED
 	else:
 		dropped_velocity = Vector2.ZERO
 	node_to_follow = null

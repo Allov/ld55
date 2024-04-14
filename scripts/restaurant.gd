@@ -5,13 +5,14 @@ var debug_visible: bool = false
 
 func _ready():
 	$DebugLayer.visible = false
+	GameManager.set_restaurant(self)
 
 func _input(event):
 	if event.is_action_pressed("toggle_debug"):
 		debug_visible = !debug_visible
 		$DebugLayer.visible = debug_visible
 
-func _process(delta):
+func _process(_delta):
 	if debug_visible:
 		update_debug_info()
 
