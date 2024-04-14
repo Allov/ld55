@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4ck1ajh7elbm"]
+[gd_scene load_steps=16 format=3 uid="uid://b4ck1ajh7elbm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qmujo"]
 [ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="2_kghhj"]
 [ext_resource type="Texture2D" uid="uid://d2mt8s4xttpj7" path="res://assets/shadow.png" id="2_u5l8y"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="3_v62kt"]
+[ext_resource type="Texture2D" uid="uid://bn0uruyssni05" path="res://assets/action_key.png" id="5_a2goi"]
 
 [sub_resource type="Curve" id="Curve_frggu"]
 max_value = 5.0
@@ -18,10 +19,10 @@ colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 0)
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l56ht"]
-radius = 18.0278
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
-radius = 19.105
+radius = 11.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htfjs"]
 
@@ -57,6 +58,40 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u5y1v"]
 _data = {
 "walk": SubResource("Animation_visx0")
+}
+
+[sub_resource type="Animation" id="Animation_ovl48"]
+resource_name = "bounce"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -13), Vector2(0, -15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l6vf"]
+_data = {
+"bounce": SubResource("Animation_ovl48")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -112,3 +147,18 @@ shape = SubResource("CapsuleShape2D_htfjs")
 libraries = {
 "": SubResource("AnimationLibrary_u5y1v")
 }
+
+[node name="ActionInRange" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -13.5345)
+scale = Vector2(1.02672, 1.02672)
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionInRange"]
+position = Vector2(0, -3)
+texture = ExtResource("5_a2goi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ActionInRange"]
+libraries = {
+"": SubResource("AnimationLibrary_1l6vf")
+}
+autoplay = "bounce"

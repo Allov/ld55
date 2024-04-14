@@ -8,6 +8,8 @@ var score: int = 0
 var lives: int = 5
 var game_speed: float = 1.0
 var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
+var current_enemy: Enemy = null
+var summon_points = {}
 
 func _input(event):
 	if event.is_action_pressed("pause_game"):

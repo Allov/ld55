@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi6qg2adhbgrs"]
+
+[ext_resource type="PackedScene" uid="uid://dd8ldwyy5jgt5" path="res://scenes/enemies/default_enemy.tscn" id="1_vovsy"]
+[ext_resource type="PackedScene" uid="uid://dpb7gm4aw8gle" path="res://scenes/projectiles/projectile_enemy.tscn" id="2_5elva"]
+[ext_resource type="PackedScene" uid="uid://bwlntn71tr8qc" path="res://scenes/ingredients/ingredient_blue.tscn" id="3_lxo1u"]
+[ext_resource type="PackedScene" uid="uid://7mmi2edwsf3i" path="res://scenes/ingredients/ingredient_red.tscn" id="4_ni18x"]
+[ext_resource type="Texture2D" uid="uid://b5kposeq6yi25" path="res://assets/monster_2.png" id="5_nduq5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikquk"]
+size = Vector2(32, 32)
+
+[node name="Enemy" instance=ExtResource("1_vovsy")]
+projectile_scene = ExtResource("2_5elva")
+ingredients_array = Array[PackedScene]([ExtResource("3_lxo1u"), ExtResource("4_ni18x")])
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 0.999995)
+texture = ExtResource("5_nduq5")
+
+[node name="Health" parent="." index="2"]
+max_health = 500
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_ikquk")
+
+[node name="DetectionArea" parent="." index="4"]
+collision_layer = 64
+collision_mask = 128

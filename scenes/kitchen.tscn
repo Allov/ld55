@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c83c7gs5uxov5"]
+[gd_scene load_steps=14 format=3 uid="uid://c83c7gs5uxov5"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="1_g506r"]
 [ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_3m1d7"]
@@ -10,30 +10,37 @@
 [ext_resource type="PackedScene" uid="uid://c47xynln6fcmm" path="res://scenes/summon_guard_station.tscn" id="8_dcn42"]
 [ext_resource type="PackedScene" uid="uid://b8ecdp4g5tyep" path="res://scenes/summon_enemy_station.tscn" id="9_85o4o"]
 [ext_resource type="Texture2D" uid="uid://cihsr10066tvu" path="res://assets/summoning-circle.png" id="10_b7unu"]
+[ext_resource type="PackedScene" uid="uid://bi6qg2adhbgrs" path="res://scenes/enemies/enemy2.tscn" id="11_1v3y2"]
 [ext_resource type="PackedScene" uid="uid://dax2c82gpwk0b" path="res://scenes/enemies/enemy1.tscn" id="11_hmfi8"]
-[ext_resource type="PackedScene" uid="uid://cy4gh8iuagoac" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
+[ext_resource type="PackedScene" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
 
 [node name="Kitchen" type="Node2D"]
 
 [node name="CookingStationA" parent="." instance=ExtResource("4_l2430")]
-position = Vector2(320, 48)
+position = Vector2(347, 132)
 accepts = "A"
 
 [node name="CookingStationB" parent="." instance=ExtResource("4_l2430")]
-position = Vector2(320, 96)
+position = Vector2(291, 179)
 accepts = "B"
 interaction_type = 2
 
 [node name="Sprite" parent="CookingStationB" index="0"]
 texture = ExtResource("5_cl2gs")
 
+[node name="ProgressBar" parent="CookingStationB" index="3"]
+metadata/_edit_use_anchors_ = true
+
 [node name="CookingStationC" parent="." instance=ExtResource("4_l2430")]
-position = Vector2(320, 144)
+position = Vector2(218, 192)
 accepts = "C"
 interaction_type = 1
 
 [node name="Sprite" parent="CookingStationC" index="0"]
 texture = ExtResource("6_5wowo")
+
+[node name="ProgressBar" parent="CookingStationC" index="3"]
+metadata/_edit_use_anchors_ = true
 
 [node name="IngredientA" parent="." instance=ExtResource("1_g506r")]
 kind = "A"
@@ -63,16 +70,21 @@ texture = ExtResource("3_3js2c")
 texture = ExtResource("3_3js2c")
 
 [node name="Plate" parent="." instance=ExtResource("7_e4vjx")]
-position = Vector2(264, 176)
+position = Vector2(143, 188)
 
 [node name="SummonGuardArea" parent="." instance=ExtResource("8_dcn42")]
-position = Vector2(136, 16)
+position = Vector2(81, 18)
 spawn_points = Array[NodePath]([NodePath("../Summoning-circle/SummonTarget1"), NodePath("../Summoning-circle/SummonTarget2"), NodePath("../Summoning-circle/SummonTarget3"), NodePath("../Summoning-circle/SummonTarget4"), NodePath("../Summoning-circle/SummonTarget5")])
 
 [node name="SummonEnemyArea" parent="." instance=ExtResource("9_85o4o")]
-position = Vector2(214, 18)
+position = Vector2(187, 41)
 spawn_point = NodePath("../Summoning-circle/SummonEnemyTarget")
 enemy_scene = ExtResource("11_hmfi8")
+
+[node name="SummonEnemyArea2" parent="." instance=ExtResource("9_85o4o")]
+position = Vector2(295, -2)
+spawn_point = NodePath("../Summoning-circle/SummonEnemyTarget")
+enemy_scene = ExtResource("11_1v3y2")
 
 [node name="Summoning-circle" type="Sprite2D" parent="."]
 position = Vector2(184, -80)

@@ -48,6 +48,7 @@ func progress():
 		$ProgressBar.value += progress_value * get_process_delta_time()
 
 	if $ProgressBar.value >= 1:
+		$ProgressBar.value = 0
 		_stop_cooking()
 
 func is_holding_station():
