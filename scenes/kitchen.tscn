@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cihsr10066tvu" path="res://assets/summoning-circle.png" id="10_b7unu"]
 [ext_resource type="PackedScene" uid="uid://bi6qg2adhbgrs" path="res://scenes/enemies/enemy2.tscn" id="11_1v3y2"]
 [ext_resource type="PackedScene" uid="uid://dax2c82gpwk0b" path="res://scenes/enemies/enemy1.tscn" id="11_hmfi8"]
+[ext_resource type="PackedScene" uid="uid://cy4gh8iuagoac" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
 
 [node name="Kitchen" type="Node2D"]
 
@@ -105,6 +106,9 @@ position = Vector2(3, -86)
 position = Vector2(-67, -55)
 
 [node name="SummonEnemyTarget" type="Node2D" parent="Summoning-circle"]
+
+[node name="PlateStation" parent="." instance=ExtResource("12_m7t8w")]
+position = Vector2(171, 184)
 
 [editable path="CookingStationB"]
 [editable path="CookingStationC"]
