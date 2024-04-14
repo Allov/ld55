@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bidbm7kwjwos0"]
+[gd_scene load_steps=4 format=3 uid="uid://bidbm7kwjwos0"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_ewehe"]
 [ext_resource type="PackedScene" uid="uid://ba225pakvh08b" path="res://scenes/heart_container.tscn" id="2_4bluw"]
+[ext_resource type="FontFile" uid="uid://jhsuxvtummf3" path="res://assets/font/NewRocker-Regular.ttf" id="3_rkhph"]
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_ewehe")
@@ -15,8 +16,11 @@ grow_horizontal = 2
 theme_override_constants/h_separation = 1
 
 [node name="ScoreLabel" type="Label" parent="."]
-offset_left = 305.0
-offset_top = 193.0
-offset_right = 384.0
-offset_bottom = 216.0
+offset_left = 302.0
+offset_top = 191.0
+offset_right = 378.0
+offset_bottom = 211.0
+theme_override_fonts/font = ExtResource("3_rkhph")
+theme_override_font_sizes/font_size = 15
 text = "Score: 0"
+horizontal_alignment = 2
