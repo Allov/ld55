@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6djtlfpv5wcp"]
+[gd_scene load_steps=8 format=3 uid="uid://c6djtlfpv5wcp"]
 
 [ext_resource type="Script" path="res://scripts/guard.gd" id="1_edka2"]
+[ext_resource type="PackedScene" uid="uid://c8qonasjt8p0s" path="res://assets/poof.tscn" id="2_5y0a6"]
 [ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="2_ksudt"]
 [ext_resource type="Script" path="res://components/health.gd" id="3_aiym8"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="4_rukfq"]
@@ -14,6 +15,9 @@ size = Vector2(133, 132)
 collision_layer = 128
 collision_mask = 33
 script = ExtResource("1_edka2")
+
+[node name="Poof" parent="." instance=ExtResource("2_5y0a6")]
+lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ksudt")
