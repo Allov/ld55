@@ -21,7 +21,6 @@ func _process(_delta):
 	# Update the patience bar based on the remaining time
 	var time_left = patience_timer.time_left
 	patience_bar.value = time_left / initial_patience
-	print("Time left: " + str(time_left))
 	
 func _physics_process(delta):
 	var direction = target_position - global_position
