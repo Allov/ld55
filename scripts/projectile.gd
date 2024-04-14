@@ -11,11 +11,9 @@ var target
 func start(_position, _target):
 	global_position = _position
 	rotation += randf_range(-0.09, 0.09)
-	velocity = transform.x * speed
 	target = _target
 
 func _ready():
-	velocity = speed * 5 * Vector2.RIGHT.rotated(rotation)
 	$Lifespan.connect("timeout", _on_timeout_complete)
 	$Lifespan.start()
 

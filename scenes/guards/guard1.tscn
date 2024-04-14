@@ -11,3 +11,6 @@ projectile_scene = ExtResource("2_8xhd0")
 position = Vector2(-1.90735e-06, -2.32458e-06)
 scale = Vector2(0.283871, 0.253465)
 texture = ExtResource("2_0ts63")
+
+[node name="Health" parent="." index="2"]
+max_health = 3
