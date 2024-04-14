@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm4fc8vn2pg73"]
 
 [ext_resource type="PackedScene" uid="uid://2rfcretcyro7" path="res://scenes/projectiles/default_projectile.tscn" id="1_agwvo"]
-[ext_resource type="Texture2D" uid="uid://ds2tovxar4sg5" path="res://scenes/projectiles/cat.png" id="2_gdxv4"]
+[ext_resource type="Texture2D" uid="uid://dsc3ifqgu5xi0" path="res://assets/projectile_2.png" id="2_ovs8q"]
 
 [node name="Projectile" instance=ExtResource("1_agwvo")]
 collision_layer = 16
 collision_mask = 64
 
-[node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.025, 0.025)
-texture = ExtResource("2_gdxv4")
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_ovs8q")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-0.5, 0)
 
-[node name="Hitbox" parent="." index="2"]
+[node name="Hitbox" parent="." index="4"]
 collision_layer = 16
 collision_mask = 64

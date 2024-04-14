@@ -1,6 +1,8 @@
 class_name Guard
 extends CharacterBody2D
 
+signal health_depleted(guard)
+
 @export var projectile_scene: PackedScene
 @export_range(1, 10) var attack_delay: float = 2
 
@@ -34,4 +36,5 @@ func _on_timeout_complete() -> void:
 	can_shoot = true
 
 func _on_health_health_depleted():
+	health_depleted.emit(self)
 	queue_free()

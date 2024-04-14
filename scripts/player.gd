@@ -11,6 +11,7 @@ var speed = 0.0
 var object_in_hand: Node2D = null
 var cooking_station_in_range: CookingStation = null
 var summoning_guard_station_in_range: SummoningGuardStation = null
+var summoning_enemy_station_in_range: SummoningEnemyStation = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
@@ -45,6 +46,9 @@ func _process(_delta):
 		
 	if summoning_guard_station_in_range and Input.is_action_pressed("action"):
 		summoning_guard_station_in_range.progress()
+
+	if summoning_enemy_station_in_range and Input.is_action_pressed("action"):
+		summoning_enemy_station_in_range.progress()
 
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
@@ -128,8 +132,15 @@ func _on_CookArea_body_exited(body):
 func _on_CookArea_area_entered(area):
 	if area is SummoningGuardStation:
 		summoning_guard_station_in_range = area
+		
+	if area is SummoningEnemyStation:
+		summoning_enemy_station_in_range = area
 
 func _on_CookArea_area_exited(area):
 	if area is SummoningGuardStation:
 		summoning_guard_station_in_range.reset_progress()
 		summoning_guard_station_in_range = null
+
+	if area is SummoningEnemyStation:
+		summoning_enemy_station_in_range.reset_progress()
+		summoning_enemy_station_in_range = null

@@ -1,9 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3ijvg2j6cpda"]
-
-[ext_resource type="Texture2D" uid="uid://cihsr10066tvu" path="res://assets/summoning-circle.png" id="1_t8xht"]
+[gd_scene format=3 uid="uid://d3ijvg2j6cpda"]
 
 [node name="Fridge" type="Node2D"]
-
-[node name="Summoning-circle" type="Sprite2D" parent="."]
-position = Vector2(179, 137)
-texture = ExtResource("1_t8xht")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8ecdp4g5tyep"]
+
+[ext_resource type="Script" path="res://scripts/summoning-enemy-station.gd" id="1_xwt3o"]
+[ext_resource type="PackedScene" uid="uid://c03o2t1nb3ls8" path="res://assets/progress_bar.tscn" id="3_uv8a3"]
+[ext_resource type="Texture2D" uid="uid://fqi8u3441678" path="res://assets/summoning-spot.png" id="4_32iin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5vrl"]
+radius = 18.0278
+
+[node name="SummonEnemyArea" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_xwt3o")
+
+[node name="ProgressBar" parent="." instance=ExtResource("3_uv8a3")]
+visible = false
+offset_top = -24.0
+offset_bottom = -21.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_32iin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r5vrl")
