@@ -1,11 +1,15 @@
 # gamemanager.gd est un singleton appelé par main.gd et géré dans Autoload
 extends Node
 
+signal player_lost_live
+
 var instance: GameManager
 var score: int = 0
-var lives: int = 3
+var lives: int = 5
 var game_speed: float = 1.0
 var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
+var current_enemy: Enemy = null
+var summon_points = {}
 
 func _input(event):
 	if event.is_action_pressed("pause_game"):
@@ -13,7 +17,6 @@ func _input(event):
 
 func start_game():
 	score = 0
-	lives = 3
 	game_speed = 1.0
 	game_state = "playing"
 	print("Game started")
@@ -43,6 +46,7 @@ func end_game():
 func lose_life():
 	lives -= 1
 	print("Lives remaining: ", lives)
+	player_lost_live.emit()
 	if lives <= 0:
 		end_game()
 

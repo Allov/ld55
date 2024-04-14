@@ -12,7 +12,7 @@ func _ready():
 	patience_timer.wait_time = initial_patience
 	patience_timer.start()
 
-func _process(delta):
+func _process(_delta):
 	# Update the patience bar based on the remaining time
 	var time_left = patience_timer.time_left
 	var patience_level = time_left / initial_patience

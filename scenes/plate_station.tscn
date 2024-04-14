@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy4gh8iuagoac"]
+
+[ext_resource type="Script" path="res://scripts/plate_station.gd" id="1_43qdm"]
+[ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="2_7npc5"]
+[ext_resource type="Texture2D" uid="uid://cvfp5ju3bnasy" path="res://assets/plate_station.png" id="2_g1ydn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k48rh"]
+size = Vector2(16, 16)
+
+[node name="PlateStation" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_43qdm")
+plate_scene = ExtResource("2_7npc5")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_g1ydn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k48rh")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, 20)

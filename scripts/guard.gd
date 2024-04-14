@@ -1,10 +1,12 @@
 class_name Guard
 extends CharacterBody2D
 
+signal health_depleted(guard)
+
 @export var projectile_scene: PackedScene
-@export_range(1, 10) var attack_delay: float = 2
 
 var timer;
+var is_dead = false;
 var can_shoot = false;
 var enemy = null;
 
@@ -14,7 +16,7 @@ func _ready():
 	$AttackDelay.start()
 
 func _process(delta):
-	if(can_shoot):
+	if can_shoot and not is_dead:
 		if(enemy == null):
 			for body in $DetectionArea.get_overlapping_bodies():
 				if body.is_in_group("enemies"):
@@ -22,6 +24,8 @@ func _process(delta):
 					break
 		else:
 			shoot_projectile(enemy)
+	elif is_dead:
+		queue_free()
 
 func shoot_projectile(target: CharacterBody2D):
 	var projectile = projectile_scene.instantiate()
@@ -34,4 +38,5 @@ func _on_timeout_complete() -> void:
 	can_shoot = true
 
 func _on_health_health_depleted():
-	queue_free()
+	is_dead = true
+	health_depleted.emit(self)
