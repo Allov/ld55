@@ -10,6 +10,8 @@ var game_speed: float = 1.0
 var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
 var current_enemy: Enemy = null
 var summon_points = {}
+var player = null
+var restaurant = null
 
 func _input(event):
 	if event.is_action_pressed("pause_game"):
@@ -60,3 +62,15 @@ func update_game_speed():
 	elif score > 500:
 		game_speed = 2.0
 	print("Game speed updated to: ", game_speed)
+
+func set_player(_player: Node):
+	player = _player
+
+func get_player():
+	return player
+
+func set_restaurant(_restaurant: Node):
+	restaurant = _restaurant
+
+func get_restaurant():
+	return restaurant

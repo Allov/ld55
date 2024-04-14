@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4p68qi7v46jv"]
+[gd_scene load_steps=9 format=3 uid="uid://4p68qi7v46jv"]
 
 [ext_resource type="Script" path="res://scripts/customer.gd" id="1_lu0dh"]
 [ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="1_mtt6d"]
@@ -19,7 +19,41 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
-[node name="Customer" type="Area2D"]
+[sub_resource type="Animation" id="Animation_gt4pq"]
+resource_name = "pulse"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MealOrder:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rhrf"]
+_data = {
+"pulse": SubResource("Animation_gt4pq")
+}
+
+[node name="Customer" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_lu0dh")
 
@@ -49,6 +83,7 @@ value = 1.0
 show_percentage = false
 
 [node name="OrderDisplay" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(9.01, -15.375)
 
 [node name="Bubble" type="Sprite2D" parent="OrderDisplay"]
@@ -58,5 +93,12 @@ texture = ExtResource("3_k57ty")
 
 [node name="MealOrder" type="Sprite2D" parent="OrderDisplay"]
 position = Vector2(4.55, -2.115)
+scale = Vector2(1.22097, 1.22097)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrderDisplay"]
+libraries = {
+"": SubResource("AnimationLibrary_6rhrf")
+}
+autoplay = "pulse"
 
 [connection signal="timeout" from="PatienceTimer" to="." method="_on_patience_timer_timeout"]
