@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8qonasjt8p0s"]
+
+[ext_resource type="Texture2D" uid="uid://cxkcwpxvovfmq" path="res://assets/smoke.png" id="1_qh4e6"]
+[ext_resource type="Script" path="res://scripts/poof.gd" id="2_icpyj"]
+
+[sub_resource type="Gradient" id="Gradient_4gu8w"]
+colors = PackedColorArray(1, 1, 1, 0.490196, 1, 1, 1, 0)
+
+[node name="Poof" type="CPUParticles2D"]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.5
+texture = ExtResource("1_qh4e6")
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(0, 20)
+initial_velocity_min = 1.0
+initial_velocity_max = 25.0
+angular_velocity_min = 30.0
+angular_velocity_max = 180.0
+color_ramp = SubResource("Gradient_4gu8w")
+script = ExtResource("2_icpyj")
