@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4ck1ajh7elbm"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_qmujo"]
+[ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="2_kghhj"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="3_v62kt"]
+
+[sub_resource type="Curve" id="Curve_frggu"]
+max_value = 5.0
+_data = [Vector2(0, 2.98969), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_j43rs"]
+interpolation_mode = 2
+colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0nsr"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l56ht"]
+radius = 18.0278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
+radius = 19.105
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htfjs"]
+
+[sub_resource type="Animation" id="Animation_visx0"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5y1v"]
+_data = {
+"walk": SubResource("Animation_visx0")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_qmujo")
+
+[node name="Trailing" type="CPUParticles2D" parent="."]
+position = Vector2(0, 3)
+lifetime = 0.6
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_frggu")
+color_ramp = SubResource("Gradient_j43rs")
+
+[node name="Icon" type="Sprite2D" parent="."]
+rotation = -0.0450098
+texture = ExtResource("2_kghhj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s0nsr")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_l56ht")
+
+[node name="CookArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CookArea"]
+shape = SubResource("CircleShape2D_gglyw")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+script = ExtResource("3_v62kt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_htfjs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u5y1v")
+}

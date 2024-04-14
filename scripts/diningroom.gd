@@ -24,10 +24,12 @@ func spawn_customer():
 	var new_customer = customer.instantiate()
 	var position_index = len(customers) % customer_positions.size()
 	new_customer.position = customer_positions[position_index]
-	new_customer.set_order("default") #Commande du client à default, todo: rendre random
+	var random_order = Recipebook.get_random_recipe()
+	new_customer.set_order(random_order)
 	add_child(new_customer)
 	customers.append(new_customer)
-	print("New customer spawned with order: " + new_customer.order)
+	var meal_name = Recipebook.recipes[random_order]["name"]
+	print("New customer spawned with order: " + meal_name)
 
 func _process(delta):
 	pass
