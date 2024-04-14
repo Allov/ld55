@@ -13,7 +13,3 @@ collision_mask = 1
 position = Vector2(315, 72)
 collision_layer = 1
 collision_mask = 1
-=======
-[gd_scene format=3 uid="uid://d3ijvg2j6cpda"]
-
-[node name="Fridge" type="Node2D"]
