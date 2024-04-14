@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://2rfcretcyro7"]
+[gd_scene load_steps=9 format=3 uid="uid://2rfcretcyro7"]
 
 [ext_resource type="Texture2D" uid="uid://dw3sgmr1e5tp3" path="res://icon.svg" id="1_0k5yn"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_2o7k1"]
 [ext_resource type="Texture2D" uid="uid://d2mt8s4xttpj7" path="res://assets/shadow.png" id="2_4llyh"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_wap7x"]
+[ext_resource type="AudioStream" uid="uid://cx2hdmaueps38" path="res://assets/sfx/projectile.wav" id="5_rxmfb"]
 
 [sub_resource type="Gradient" id="Gradient_ncdr6"]
 colors = PackedColorArray(0.870588, 0.34902, 0.364706, 1, 0.819608, 0.133333, 0.266667, 0)
@@ -47,5 +48,9 @@ shape = SubResource("RectangleShape2D_kstbg")
 
 [node name="Lifespan" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rxmfb")
+volume_db = -10.0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
