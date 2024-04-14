@@ -11,10 +11,12 @@ var transformed = false
 var cooking = false
 var cooked = false
 var meal = false
+var moveVector: Vector2
+var reset_state = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func move_body(targetPos: Vector2):
+	moveVector = targetPos
+	reset_state = true
 
 func cook():
 	cooking = true
@@ -41,10 +43,6 @@ func stop_following():
 	print("Stopped following: ", node_to_follow)
 	node_to_follow = null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _integrate_forces(state):
 	if just_dropped:
 		just_dropped = false
@@ -56,3 +54,8 @@ func _integrate_forces(state):
 		state.apply_central_force(Vector2.ZERO)
 		state.apply_torque(0)
 		state.transform = node_to_follow.global_transform
+	
+	if reset_state:
+		state.transform = Transform2D(0.0, moveVector)
+		reset_state = false
+	

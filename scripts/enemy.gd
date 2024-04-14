@@ -47,6 +47,5 @@ func _on_health_health_depleted():
 	for ingredient in ingredients_array:
 		var instance = ingredient.instantiate()
 		restaurant.call_deferred("add_child", instance)
-		instance.global_position = global_position
-		instance.apply_force(Vector2(100, 100))
+		instance.move_body(global_position)
 	is_dead = true
