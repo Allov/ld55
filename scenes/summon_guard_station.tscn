@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c47xynln6fcmm"]
+
+[ext_resource type="Script" path="res://scripts/summoning-guard-station.gd" id="1_6gs44"]
+[ext_resource type="PackedScene" uid="uid://byphuqq7bbdpu" path="res://scenes/guards/guard1.tscn" id="2_r3seb"]
+[ext_resource type="Texture2D" uid="uid://fqi8u3441678" path="res://assets/summoning-spot.png" id="3_hhtq2"]
+[ext_resource type="PackedScene" uid="uid://c03o2t1nb3ls8" path="res://assets/progress_bar.tscn" id="3_ljpov"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5vrl"]
+radius = 18.0278
+
+[node name="SummonGuardArea" type="Area2D"]
+modulate = Color(0.329412, 0.588235, 0.686275, 1)
+collision_layer = 8
+script = ExtResource("1_6gs44")
+guard_scene = ExtResource("2_r3seb")
+
+[node name="ProgressBar" parent="." instance=ExtResource("3_ljpov")]
+visible = false
+offset_top = -24.0
+offset_bottom = -21.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_hhtq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r5vrl")

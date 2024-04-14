@@ -25,6 +25,7 @@ func stop_cooking():
 	kind = cooked_kind
 	$Raw.visible = false
 	$Cooked.visible = true
+	print("Ingredient cooked: ", kind)
 
 func follow(node: Node2D):
 	node_to_follow = node
