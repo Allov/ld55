@@ -16,7 +16,3 @@ func _player_lost_live():
 	var children = $HBoxContainer.get_children()
 	if children.size() > 0:
 		$HBoxContainer.remove_child(children[0])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

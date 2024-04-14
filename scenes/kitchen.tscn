@@ -11,11 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
 [ext_resource type="PackedScene" uid="uid://c47xynln6fcmm" path="res://scenes/summon_guard_station.tscn" id="8_dcn42"]
 [ext_resource type="Texture2D" uid="uid://dsjhy4wp0nsb2" path="res://assets/ingredients/ing-pink.png" id="8_pfkq2"]
-[ext_resource type="PackedScene" uid="uid://b8ecdp4g5tyep" path="res://scenes/summon_enemy_station.tscn" id="9_85o4o"]
+[ext_resource type="PackedScene" path="res://scenes/summon_enemy_station.tscn" id="9_85o4o"]
 [ext_resource type="Texture2D" uid="uid://cihsr10066tvu" path="res://assets/summoning-circle.png" id="10_b7unu"]
 [ext_resource type="PackedScene" uid="uid://bi6qg2adhbgrs" path="res://scenes/enemies/enemy2.tscn" id="11_1v3y2"]
 [ext_resource type="PackedScene" uid="uid://dax2c82gpwk0b" path="res://scenes/enemies/enemy1.tscn" id="11_hmfi8"]
-[ext_resource type="PackedScene" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
+[ext_resource type="PackedScene" uid="uid://cy4gh8iuagoac" path="res://scenes/plate_station.tscn" id="12_m7t8w"]
 [ext_resource type="PackedScene" uid="uid://du8ixkjq3nhy" path="res://scenes/trash.tscn" id="14_iitpv"]
 
 [node name="Kitchen" type="Node2D"]

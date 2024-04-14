@@ -6,9 +6,6 @@ signal health_depleted(enemy)
 @export var projectile_scene: PackedScene
 @export var ingredients_array: Array[PackedScene]
 @export var detection_area: Area2D
-# À changer?
-@onready var player = get_node("/root/Restaurant/Player")
-@onready var restaurant = get_node("/root/Restaurant")
 
 var timer;
 var is_dead = false
@@ -30,7 +27,7 @@ func _process(_delta):
 					break
 				
 			if(guard == null):
-				shoot_projectile(player)
+				shoot_projectile(GameManager.get_player())
 		else:
 			shoot_projectile(guard)
 	elif is_dead:
@@ -46,7 +43,7 @@ func shoot_projectile(target: CharacterBody2D):
 func deferred_spawn_ingredients(_ingredients_array: Array[PackedScene]):
 	for ingredient in _ingredients_array:
 		var instance = ingredient.instantiate()
-		instance.spawn_from_enemy(global_position, restaurant)
+		instance.spawn_from_enemy(global_position, GameManager.get_restaurant())
 
 func _on_timeout_complete() -> void:
 	can_shoot = true
