@@ -13,7 +13,7 @@ var recipes = {
 		"ingredients": ["Cooked_B"], 
 		"difficulty": "easy", 
 		"sprite": "res://assets/meals/red.png",
-		"name": "Read Meal"
+		"name": "Red Meal"
 	},
 	"Cooked_C": {
 		"ingredients": ["Cooked_C"], 
@@ -25,25 +25,25 @@ var recipes = {
 		"ingredients": ["Cooked_A", "Cooked_B"], 
 		"difficulty": "medium", 
 		"sprite": "res://assets/meals/green-red.png",
-		"name": "Red + Pink Meal"
+		"name": "Green + Red Meal"
 	},
 	"Cooked_A+Cooked_C": {
 		"ingredients": ["Cooked_A", "Cooked_C"], 
 		"difficulty": "medium", 
 		"sprite": "res://assets/meals/green-pink.png",
-		"name": "Green + Red Meal"
+		"name": "Green + Pink Meal"
 	},
 	"Cooked_B+Cooked_C": {
 		"ingredients": ["Cooked_B", "Cooked_C"], 
 		"difficulty": "medium", 
-		"sprite": "res://assets/meals/red-pink.png",
-		"name": "Green and Pink Meal"
+		"sprite": "res://assets/meals/pink-red.png",
+		"name": "Pink and Red Meal"
 	},
 	"Cooked_A+Cooked_B+Cooked_C": {
 		"ingredients": ["Cooked_A", "Cooked_B", "Cooked_C"], 
 		"difficulty": "hard", 
 		"sprite": "res://assets/meals/green-pink-red.png",
-		"name": "Green + Red + Pink Meal"
+		"name": "Green + Pink + Red Meal"
 	}
 }
 

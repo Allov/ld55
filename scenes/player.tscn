@@ -102,7 +102,7 @@ script = ExtResource("1_qmujo")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.47451)
-position = Vector2(0, 6)
+position = Vector2(1, 13)
 texture = ExtResource("2_u5l8y")
 
 [node name="Trailing" type="CPUParticles2D" parent="."]
