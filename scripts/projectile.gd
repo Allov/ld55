@@ -16,6 +16,7 @@ func start(_position, _target):
 func _ready():
 	$Lifespan.connect("timeout", _on_timeout_complete)
 	$Lifespan.start()
+	$SpawnAudio.play()
 
 func _physics_process(delta: float) -> void:
 	if target != null:
