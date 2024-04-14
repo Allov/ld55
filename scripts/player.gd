@@ -13,6 +13,7 @@ var cooking_station_in_range: CookingStation = null
 var summoning_guard_station_in_range: SummoningGuardStation = null
 var summoning_enemy_station_in_range: SummoningEnemyStation = null
 var plate_station_in_range: PlateStation = null
+var thrash_in_range: Trash = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
@@ -26,12 +27,15 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("action"):
 
-		if object_in_range:
+		if object_in_range or object_in_range is Trash:
 			# If the player is not holding an object and an object is in range, pick it up.
 			if object_in_range is CookingStation and object_in_hand == null:
 				object_in_range.progress()
 			if object_in_range is PlateStation:
 				object_in_range.spawn_plate()
+			if object_in_range is Trash and object_in_hand != null:
+				object_in_hand.queue_free()
+				object_in_hand == null
 			if object_in_hand == null:
 				pick_up_object(object_in_range)
 			# Player is holding an object
@@ -66,7 +70,7 @@ func _process(_delta):
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
 	for object in objects_in_range:
-		if object != object_in_hand and (object is Plate or object is CookingStation or object is PlateStation or (object is Ingredient and object.cooking == false)):
+		if object != object_in_hand and (object is Plate or object is CookingStation or object is PlateStation or object is Trash or (object is Ingredient and object.cooking == false)):
 			return object
 			
 func pick_up_object(object_in_range):
@@ -138,6 +142,8 @@ func _on_CookArea_body_entered(body):
 		print("In range!")
 	elif body is PlateStation:
 		plate_station_in_range = body
+	elif body is Trash:
+		thrash_in_range = body
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
@@ -145,6 +151,8 @@ func _on_CookArea_body_exited(body):
 		print("Not in range!")
 	elif body is PlateStation:
 		cooking_station_in_range = null
+	elif body is Trash:
+		thrash_in_range = null
 
 func _on_CookArea_area_entered(area):
 	if area is SummoningGuardStation:
