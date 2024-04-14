@@ -22,7 +22,7 @@ func _process(_delta):
 	var time_left = patience_timer.time_left
 	patience_bar.value = time_left / initial_patience
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	var direction = target_position - global_position
 	
 	if direction.length() < 5.0:
