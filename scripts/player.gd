@@ -138,9 +138,9 @@ func _on_CookArea_area_entered(area):
 
 func _on_CookArea_area_exited(area):
 	if area is SummoningGuardStation:
-		summoning_guard_station_in_range.reset_progress()
+		area.reset_progress()
 		summoning_guard_station_in_range = null
 
 	if area is SummoningEnemyStation:
-		summoning_enemy_station_in_range.reset_progress()
+		area.reset_progress()
 		summoning_enemy_station_in_range = null

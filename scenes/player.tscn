@@ -18,10 +18,10 @@ colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 0)
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l56ht"]
-radius = 18.0278
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
-radius = 19.105
+radius = 11.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htfjs"]
 

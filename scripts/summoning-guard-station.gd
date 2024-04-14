@@ -5,12 +5,10 @@ class_name SummoningGuardStation
 @export var guard_scene: PackedScene = null
 @export var progress_value: float = 0.5
 
-var summon_points = {}
-
 func summon_guard():
 	var index = -1
-	for point in summon_points:
-		if summon_points[point] == null:
+	for point in GameManager.summon_points:
+		if GameManager.summon_points[point] == null:
 			index = point
 	
 	print(index)
@@ -24,7 +22,7 @@ func summon_guard():
 	var spawn_point = spawn_points[index]
 	guard.global_position = get_node(spawn_point).global_position
 	
-	summon_points[index] = guard
+	GameManager.summon_points[index] = guard
 	
 	return true
 
@@ -43,7 +41,7 @@ func reset_progress():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(spawn_points.size()):
-		summon_points[i] = null
+		GameManager.summon_points[i] = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
