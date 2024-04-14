@@ -13,8 +13,10 @@ var speed = 0.0
 var object_in_hand: Node2D = null
 var cooking_station_in_range: CookingStation = null
 var summoning_guard_station_in_range: SummoningGuardStation = null
+var customer_in_range: Customer = null
 var summoning_enemy_station_in_range: SummoningEnemyStation = null
 var plate_station_in_range: PlateStation = null
+var thrash_in_range: Trash = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
@@ -27,6 +29,12 @@ func _process(_delta):
 	object_in_range = get_object_in_range()
 
 	if Input.is_action_just_pressed("action"):
+		object_in_range = get_object_in_range()
+		
+		if customer_in_range and object_in_hand and object_in_hand is Plate:
+			print("Entrer dans interraction Plate/customer", object_in_range)
+			interact_with_object(customer_in_range)
+		
 
 		if object_in_range:
 			# If the player is not holding an object and an object is in range, pick it up.
@@ -34,6 +42,9 @@ func _process(_delta):
 				object_in_range.progress()
 			if object_in_range is PlateStation:
 				object_in_range.spawn_plate()
+			if object_in_range is Trash and object_in_hand != null:
+				object_in_hand.queue_free()
+				object_in_hand = null
 			if object_in_hand == null:
 				pick_up_object(object_in_range)
 			# Player is holding an object
@@ -71,7 +82,7 @@ func _process(_delta):
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
 	for object in objects_in_range:
-		if object != object_in_hand and (object is Plate or object is CookingStation or object is PlateStation or (object is Ingredient and object.cooking == false)):
+		if object != object_in_hand and (object is Plate or object is CookingStation or object is PlateStation or object is Trash or (object is Ingredient and object.cooking == false)):
 			return object
 			
 func pick_up_object(object_in_range):
@@ -82,6 +93,16 @@ func pick_up_object(object_in_range):
 		object_in_hand.follow(self)
 
 func interact_with_object(object_in_range):
+	# Check if the object in range is a Customer and the player is holding a plate.
+	if object_in_range is Customer and object_in_hand and object_in_hand is Plate:
+		if object_in_range.receive_plate(object_in_hand):
+			# If the meal is accepted, clear the plate from player's hand
+			clear_object_in_hand()
+			return  # Return here to stop further processing
+		else:
+			# Handle case where the meal is not accepted
+			print("Meal delivery failed. Check the order.")
+	
 	# A cooking station is in range, try and cook the object.
 	if object_in_range is CookingStation and object_in_hand is Ingredient and object_in_hand.cooked == false:
 		if object_in_range.cook(object_in_hand):
@@ -93,6 +114,14 @@ func interact_with_object(object_in_range):
 			object_in_hand.stop_following()
 			object_in_hand.queue_free()
 			object_in_hand = null
+		# If a customer is in range and the player is holding a plate, try to give the plate to the customer.
+	elif customer_in_range and object_in_hand and object_in_hand is Plate:
+		if customer_in_range.receive_plate(object_in_hand):
+			# If the meal is accepted, clear the plate from player's hand
+			clear_object_in_hand()
+		else:
+			# Handle case where the meal is not accepted
+			print("Meal delivery failed. Check the order.")
 
 func _physics_process(delta):
 	var current_direction = velocity.normalized()
@@ -148,6 +177,8 @@ func _on_CookArea_body_entered(body):
 		print("In range!")
 	elif body is PlateStation:
 		plate_station_in_range = body
+	elif body is Trash:
+		thrash_in_range = body
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
@@ -155,6 +186,8 @@ func _on_CookArea_body_exited(body):
 		print("Not in range!")
 	elif body is PlateStation:
 		cooking_station_in_range = null
+	elif body is Trash:
+		thrash_in_range = null
 
 func _on_CookArea_area_entered(area):
 	if area is SummoningGuardStation:
@@ -162,8 +195,20 @@ func _on_CookArea_area_entered(area):
 		
 	if area is SummoningEnemyStation:
 		summoning_enemy_station_in_range = area
+	if area is CookingStation:
+		cooking_station_in_range = area
+		print("In range!")
+	elif area is Customer:
+		customer_in_range = area
+		print("Customer entered proximity: ", area.name)
 
 func _on_CookArea_area_exited(area):
+	if area is CookingStation:
+		cooking_station_in_range = null
+		print("Not in range!")
+	elif area is Customer:
+		customer_in_range = null
+		print("Customer exited proximity: ", area.name)
 	if area is SummoningGuardStation:
 		area.reset_progress()
 		summoning_guard_station_in_range = null

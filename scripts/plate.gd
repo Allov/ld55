@@ -1,3 +1,4 @@
+#Plate script
 extends RigidBody2D
 class_name Plate
 
@@ -28,8 +29,21 @@ func add_ingredient(kind: String):
 		return false
 
 func update_meal():
-	current_meal = Recipebook.get_meal(ingredients)
+	var meal_info = Recipebook.get_meal_info(ingredients)
+	if meal_info and meal_info.has("name"):
+		current_meal = meal_info["name"]
+	else:
+		current_meal = "Unknown Meal"
 	print("Updated meal to: ", current_meal)
+	update_meal_sprite()
+	
+func update_meal_sprite():
+	var meal_info = Recipebook.get_meal_info(ingredients)
+	if meal_info:
+		$WithIngredients.texture = load(meal_info.sprite)  # Update the sprite texture
+
+func has_meal() -> bool:
+	return ingredients.size() > 0
 
 func follow(node: Node2D):
 	node_to_follow = node
@@ -38,24 +52,21 @@ func follow(node: Node2D):
 func stop_following():
 	just_dropped = true
 	if node_to_follow and node_to_follow.velocity:
-		dropped_velocity = node_to_follow.velocity
+		var player = get_parent().get_node("Player")
+		if player != null:
+			dropped_velocity = node_to_follow.velocity.normalized() * player.MAX_SPEED
+		else:
+			# Plate ajouté par la scène Kitchen
+			dropped_velocity = node_to_follow.velocity.normalized() * 200.0
 	else:
 		dropped_velocity = Vector2.ZERO
 	node_to_follow = null
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Initialization code here.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _integrate_forces(state):
 	if just_dropped:
 		just_dropped = false
 		state.linear_velocity = dropped_velocity
-		state.apply_central_impulse(dropped_velocity * 1.4)
+		state.apply_central_impulse(dropped_velocity * 2)
 
 	if node_to_follow != null:
 		state.linear_velocity = Vector2.ZERO

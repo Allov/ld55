@@ -20,7 +20,7 @@ func _ready():
 	$AttackDelay.connect("timeout", _on_timeout_complete)
 	$AttackDelay.start()
 
-func _process(delta):
+func _process(_delta):
 	if can_shoot and not is_dead:
 		if guard == null:
 			print($DetectionArea.get_overlapping_bodies())
