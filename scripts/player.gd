@@ -43,11 +43,9 @@ func _process(_delta):
 	if cooking_station_in_range != null and cooking_station_in_range.is_holding_station() and Input.is_action_pressed("action"):
 		cooking_station_in_range.progress()
 		
-	# if summoning_guard_station_in_range:
-		
+	if summoning_guard_station_in_range and Input.is_action_pressed("action"):
+		summoning_guard_station_in_range.progress()
 
-	
-		
 func get_object_in_range():
 	var objects_in_range = $GrabArea.get_overlapping_bodies()
 	for object in objects_in_range:
@@ -102,6 +100,14 @@ func _physics_process(delta):
 	var collided = move_and_slide()
 	if collided:
 		velocity = velocity.lerp(Vector2.ZERO, .1)
+	
+	if velocity.length() > 0:
+		$AnimationPlayer.speed_scale = 1 + velocity.length() / MAX_SPEED
+		$AnimationPlayer.play("walk")
+		$Trailing.emitting = true
+	else:
+		$AnimationPlayer.stop()
+		$Trailing.emitting = false
 
 func clear_object_in_hand():
 	if object_in_hand != null:
@@ -125,4 +131,5 @@ func _on_CookArea_area_entered(area):
 
 func _on_CookArea_area_exited(area):
 	if area is SummoningGuardStation:
+		summoning_guard_station_in_range.reset_progress()
 		summoning_guard_station_in_range = null
