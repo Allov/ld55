@@ -15,11 +15,11 @@ size = Vector2(32, 32)
 
 [node name="CookingStationA" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(320, 48)
-accepts = "green"
+accepts = "A"
 
 [node name="CookingStationB" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(320, 96)
-accepts = "blue"
+accepts = "B"
 interaction_type = 2
 
 [node name="Sprite" parent="CookingStationB" index="0"]
@@ -27,21 +27,21 @@ texture = ExtResource("5_cl2gs")
 
 [node name="CookingStationC" parent="." instance=ExtResource("4_l2430")]
 position = Vector2(320, 144)
-accepts = "red"
+accepts = "C"
 interaction_type = 1
 
 [node name="Sprite" parent="CookingStationC" index="0"]
 texture = ExtResource("6_5wowo")
 
 [node name="IngredientA" parent="." instance=ExtResource("1_g506r")]
-kind = "green"
-cooked_kind = "cooked_green"
+kind = "A"
+cooked_kind = "Cooked_A"
 
 [node name="IngredientB" parent="." instance=ExtResource("1_g506r")]
 position = Vector2(48, 96)
 scale = Vector2(0.994968, 1)
-kind = "blue"
-cooked_kind = "cooked_blue"
+kind = "B"
+cooked_kind = "Cooked_B"
 
 [node name="Raw" parent="IngredientB" index="0"]
 texture = ExtResource("2_3m1d7")
@@ -51,8 +51,8 @@ texture = ExtResource("2_3m1d7")
 
 [node name="IngredientC" parent="." instance=ExtResource("1_g506r")]
 position = Vector2(48, 144)
-kind = "red"
-cooked_kind = "cooked_red"
+kind = "C"
+cooked_kind = "Cooked_C"
 
 [node name="Raw" parent="IngredientC" index="0"]
 texture = ExtResource("3_3js2c")
