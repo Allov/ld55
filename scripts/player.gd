@@ -21,8 +21,9 @@ func _ready():
 
 func _process(_delta):
 	var object_in_range = null
+	object_in_range = get_object_in_range()
+
 	if Input.is_action_just_pressed("action"):
-		object_in_range = get_object_in_range()
 
 		if object_in_range:
 			# If the player is not holding an object and an object is in range, pick it up.
@@ -36,7 +37,17 @@ func _process(_delta):
 				interact_with_object(object_in_range)
 		else:
 			clear_object_in_hand()
-			
+	
+	var object_in_range_interactable = false
+	if object_in_range is CookingStation:
+		object_in_range_interactable = object_in_range.cooking_ingredient or (object_in_hand is Ingredient and object_in_hand.cooked == false and object_in_range.accepts == object_in_hand.kind)
+	elif object_in_range is Plate:
+		object_in_range_interactable = object_in_hand == null or (object_in_hand is Ingredient and object_in_hand.cooked)
+	elif object_in_range:
+		object_in_range_interactable = true
+
+	$ActionInRange.visible = object_in_range_interactable or summoning_enemy_station_in_range or summoning_guard_station_in_range
+
 	if object_in_hand:
 		return
 	
