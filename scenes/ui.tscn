@@ -13,3 +13,10 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 theme_override_constants/h_separation = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 305.0
+offset_top = 193.0
+offset_right = 384.0
+offset_bottom = 216.0
+text = "Score: 0"

@@ -52,6 +52,9 @@ func receive_plate(plate: Plate) -> bool:
 	var meal = plate.current_meal
 	if meal == order["name"]:  # Compare with the name in the order dictionary
 		print("Correct meal provided! Customer is satisfied.")
+		# Determine score based on difficulty
+		var score_to_add = GameManager.SCORE_EASY if order["difficulty"] == "easy" else GameManager.SCORE_MEDIUM
+		GameManager.add_score(score_to_add)
 		leave()  # Assuming the customer leaves after receiving the correct meal
 		return true
 	else:

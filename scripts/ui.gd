@@ -11,8 +11,12 @@ func _ready():
 		$HBoxContainer.add_child(heart)
 
 	GameManager.connect("player_lost_live", _player_lost_live)
+	GameManager.connect("score_updated", _update_score_label)
 
 func _player_lost_live():
 	var children = $HBoxContainer.get_children()
 	if children.size() > 0:
 		$HBoxContainer.remove_child(children[0])
+
+func _update_score_label():
+	$ScoreLabel.text = "Score: " + str(GameManager.score)
