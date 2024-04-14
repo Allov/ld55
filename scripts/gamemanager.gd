@@ -5,7 +5,7 @@ signal player_lost_live
 
 var instance: GameManager
 var score: int = 0
-var lives: int = 50
+var lives: int = 5
 var game_speed: float = 1.0
 var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
 
