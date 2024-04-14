@@ -43,13 +43,15 @@ func shoot_projectile(target: CharacterBody2D):
 	can_shoot = false
 	$AttackDelay.start()
 
+func deferred_spawn_ingredients(_ingredients_array: Array[PackedScene]):
+	for ingredient in _ingredients_array:
+		var instance = ingredient.instantiate()
+		instance.spawn_from_enemy(global_position, restaurant)
+
 func _on_timeout_complete() -> void:
 	can_shoot = true
 
 func _on_health_health_depleted():
-	for ingredient in ingredients_array:
-		var instance = ingredient.instantiate()
-		restaurant.call_deferred("add_child", instance)
-		instance.move_body(global_position)
+	call_deferred("deferred_spawn_ingredients", ingredients_array)
 	is_dead = true
 	health_depleted.emit(self)
