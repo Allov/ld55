@@ -21,7 +21,11 @@ func add_ingredient(kind: String):
 		return false
 
 func update_meal():
-	current_meal = Recipebook.get_meal_info(ingredients)
+	var meal_info = Recipebook.get_meal_info(ingredients)
+	if meal_info and meal_info.has("name"):
+		current_meal = meal_info["name"]
+	else:
+		current_meal = "Unknown Meal"
 	print("Updated meal to: ", current_meal)
 	update_meal_sprite()
 	
@@ -29,6 +33,9 @@ func update_meal_sprite():
 	var meal_info = Recipebook.get_meal_info(ingredients)
 	if meal_info:
 		$WithIngredients.texture = load(meal_info.sprite)  # Update the sprite texture
+
+func has_meal() -> bool:
+	return ingredients.size() > 0
 
 func follow(node: Node2D):
 	node_to_follow = node
