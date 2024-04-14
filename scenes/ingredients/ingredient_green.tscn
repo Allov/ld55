@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8j7nxq3otkw6"]
+[gd_scene load_steps=4 format=3 uid="uid://b8j7nxq3otkw6"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="1_qqr52"]
-[ext_resource type="Texture2D" uid="uid://cgk6xqofxc11" path="res://assets/ingredient_a_cooked.png" id="2_ti1ys"]
+[ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_kbx67"]
+[ext_resource type="Texture2D" uid="uid://b0ylbs6r6wfh2" path="res://assets/ingredient_b_cooked.png" id="3_4c7ka"]
 
 [node name="Ingredient" instance=ExtResource("1_qqr52")]
 kind = "B"
-cooked_kind = "cooked_B"
+cooked_kind = "Cooked_B"
+
+[node name="Raw" parent="." index="0"]
+texture = ExtResource("2_kbx67")
 
 [node name="Cooked" parent="." index="1"]
-texture = ExtResource("2_ti1ys")
+texture = ExtResource("3_4c7ka")

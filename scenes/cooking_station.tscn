@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bcst5fxa4s5xf" path="res://assets/indicator.tscn" id="4_bnx56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85h7n"]
-size = Vector2(16, 16)
+size = Vector2(49, 25)
 
 [node name="CookingStation" type="StaticBody2D" groups=["cooking_station"]]
 collision_layer = 8
@@ -17,6 +17,7 @@ script = ExtResource("1_kbi6u")
 texture = ExtResource("2_chwvh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_85h7n")
 
 [node name="Timer" type="Timer" parent="."]

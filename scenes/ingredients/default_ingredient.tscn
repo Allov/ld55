@@ -10,7 +10,7 @@
 [node name="Ingredient" type="RigidBody2D"]
 position = Vector2(1000, 1000)
 collision_layer = 2
-collision_mask = 11
+collision_mask = 3
 continuous_cd = 2
 max_contacts_reported = 1
 contact_monitor = true
