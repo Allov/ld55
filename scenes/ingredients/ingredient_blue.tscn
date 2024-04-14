@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://su4q2xevxfaf" path="res://assets/ingredient_c.png" id="2_nwpwj"]
 
 [node name="Ingredient" instance=ExtResource("1_rj40f")]
-kind = "blue"
-cooked_kind = "cooked_blue"
+kind = "A"
+cooked_kind = "cooked_A"
 
 [node name="Raw" parent="." index="0"]
 texture = ExtResource("2_nwpwj")
