@@ -56,6 +56,10 @@ func receive_plate(plate: Plate) -> bool:
 		$Sprite2D.visible = false
 		$OrderDisplay.visible = false
 		$PatienceBar.visible = false
+		# Determine score based on difficulty
+		var score_to_add = GameManager.SCORE_EASY if order["difficulty"] == "easy" else GameManager.SCORE_MEDIUM
+		GameManager.add_score(score_to_add)
+		leave()  # Assuming the customer leaves after receiving the correct meal
 		return true
 	else:
 		print("Wrong meal provided. Customer wanted: " + order["name"] + ", but got: " + meal)
