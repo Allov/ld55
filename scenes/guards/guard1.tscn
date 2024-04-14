@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://byphuqq7bbdpu"]
+[gd_scene load_steps=5 format=3 uid="uid://byphuqq7bbdpu"]
 
 [ext_resource type="PackedScene" uid="uid://c6djtlfpv5wcp" path="res://scenes/guards/default_guard.tscn" id="1_ggsk1"]
-[ext_resource type="Texture2D" uid="uid://xevj41aijxgi" path="res://scenes/guards/dog.png" id="2_0ts63"]
 [ext_resource type="PackedScene" uid="uid://cm4fc8vn2pg73" path="res://scenes/projectiles/projectile_ally.tscn" id="2_8xhd0"]
+[ext_resource type="Texture2D" uid="uid://bmq8u2af8bbea" path="res://assets/guard1.png" id="3_kns5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5tly"]
+size = Vector2(16, 16)
 
 [node name="Guard" instance=ExtResource("1_ggsk1")]
 projectile_scene = ExtResource("2_8xhd0")
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(-1.90735e-06, -2.32458e-06)
-scale = Vector2(0.283871, 0.253465)
-texture = ExtResource("2_0ts63")
+position = Vector2(-9.53676e-07, -2.32458e-06)
+texture = ExtResource("3_kns5d")
 
 [node name="Health" parent="." index="2"]
 max_health = 3
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_h5tly")

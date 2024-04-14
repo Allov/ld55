@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4ck1ajh7elbm"]
+[gd_scene load_steps=13 format=3 uid="uid://b4ck1ajh7elbm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qmujo"]
 [ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="2_kghhj"]
+[ext_resource type="Texture2D" uid="uid://d2mt8s4xttpj7" path="res://assets/shadow.png" id="2_u5l8y"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="3_v62kt"]
 
 [sub_resource type="Curve" id="Curve_frggu"]
@@ -64,6 +65,11 @@ collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_qmujo")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.47451)
+position = Vector2(0, 6)
+texture = ExtResource("2_u5l8y")
+
 [node name="Trailing" type="CPUParticles2D" parent="."]
 position = Vector2(0, 3)
 lifetime = 0.6
@@ -75,7 +81,6 @@ scale_amount_curve = SubResource("Curve_frggu")
 color_ramp = SubResource("Gradient_j43rs")
 
 [node name="Icon" type="Sprite2D" parent="."]
-rotation = -0.0450098
 texture = ExtResource("2_kghhj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
