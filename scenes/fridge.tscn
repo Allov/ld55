@@ -6,10 +6,11 @@
 [node name="Fridge" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_hnggj")]
+position = Vector2(98, 78)
 collision_layer = 1
 collision_mask = 1
 
 [node name="Guard" parent="." instance=ExtResource("2_qqrhf")]
-position = Vector2(315, 72)
+position = Vector2(297, 134)
 collision_layer = 1
 collision_mask = 1

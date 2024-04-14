@@ -1,7 +1,6 @@
 extends RigidBody2D
 class_name Ingredient
 
-
 @export var kind: String = "default"
 @export var cooked_kind: String = "default"
 

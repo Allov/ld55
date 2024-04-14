@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://c83c7gs5uxov5"]
 
-[ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredient.tscn" id="1_g506r"]
 [ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_3m1d7"]
 [ext_resource type="Texture2D" uid="uid://su4q2xevxfaf" path="res://assets/ingredient_c.png" id="3_3js2c"]
 [ext_resource type="PackedScene" uid="uid://chen1l7qpby23" path="res://scenes/cooking_station.tscn" id="4_l2430"]
+[ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredients/default_ingredient.tscn" id="4_ltmih"]
 [ext_resource type="Texture2D" uid="uid://cahsr4ooxnf3e" path="res://assets/cooking_station_b.png" id="5_cl2gs"]
 [ext_resource type="Texture2D" uid="uid://b6nawrjt620yv" path="res://assets/cooking_station_c.png" id="6_5wowo"]
 [ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
@@ -33,11 +33,11 @@ interaction_type = 1
 [node name="Sprite" parent="CookingStationC" index="0"]
 texture = ExtResource("6_5wowo")
 
-[node name="IngredientA" parent="." instance=ExtResource("1_g506r")]
+[node name="IngredientA" parent="." instance=ExtResource("4_ltmih")]
 kind = "green"
 cooked_kind = "cooked_green"
 
-[node name="IngredientB" parent="." instance=ExtResource("1_g506r")]
+[node name="IngredientB" parent="." instance=ExtResource("4_ltmih")]
 position = Vector2(48, 96)
 scale = Vector2(0.994968, 1)
 kind = "blue"
@@ -49,7 +49,7 @@ texture = ExtResource("2_3m1d7")
 [node name="Cooked" parent="IngredientB" index="1"]
 texture = ExtResource("2_3m1d7")
 
-[node name="IngredientC" parent="." instance=ExtResource("1_g506r")]
+[node name="IngredientC" parent="." instance=ExtResource("4_ltmih")]
 position = Vector2(48, 144)
 kind = "red"
 cooked_kind = "cooked_red"
