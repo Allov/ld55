@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://d3ijvg2j6cpda"]
+[gd_scene load_steps=3 format=3 uid="uid://d3ijvg2j6cpda"]
+
+[ext_resource type="PackedScene" uid="uid://dax2c82gpwk0b" path="res://scenes/enemies/enemy1.tscn" id="1_hnggj"]
+[ext_resource type="PackedScene" uid="uid://byphuqq7bbdpu" path="res://scenes/guards/guard1.tscn" id="2_qqrhf"]
 
 [node name="Fridge" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_hnggj")]
+collision_layer = 1
+collision_mask = 1
+
+[node name="Guard" parent="." instance=ExtResource("2_qqrhf")]
+position = Vector2(315, 72)
+collision_layer = 1
+collision_mask = 1
