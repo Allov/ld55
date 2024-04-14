@@ -1,6 +1,8 @@
 class_name Guard
 extends CharacterBody2D
 
+signal health_depleted(guard)
+
 @export var projectile_scene: PackedScene
 
 var timer;
@@ -37,3 +39,4 @@ func _on_timeout_complete() -> void:
 
 func _on_health_health_depleted():
 	is_dead = true
+	health_depleted.emit(self)

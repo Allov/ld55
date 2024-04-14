@@ -4,7 +4,7 @@ extends Node
 signal health_changed(diff: int)
 signal health_depleted()
 
-@export_range(1, 10) var max_health: int = 5 : set = set_max_health, get = get_max_health
+@export_range(1, 500) var max_health: int = 5 : set = set_max_health, get = get_max_health
 
 @onready var health: int = max_health : set = set_health, get = get_health
 
@@ -14,7 +14,7 @@ func set_max_health(value: int):
 	if is_dead:
 		return
 	
-	var clamped_value = clamp(value, 1, 10)
+	var clamped_value = clamp(value, 1, 500)
 	
 	if not clamped_value == max_health:
 		max_health = clamped_value

@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
 
+signal health_depleted(enemy)
+
 @export var projectile_scene: PackedScene
 @export var ingredients_array: Array[PackedScene]
 @export var detection_area: Area2D
@@ -21,6 +23,7 @@ func _ready():
 func _process(delta):
 	if can_shoot and not is_dead:
 		if guard == null:
+			print($DetectionArea.get_overlapping_bodies())
 			for body in $DetectionArea.get_overlapping_bodies():
 				if body.is_in_group("guards"):
 					guard = body
@@ -49,3 +52,4 @@ func _on_health_health_depleted():
 		restaurant.call_deferred("add_child", instance)
 		instance.move_body(global_position)
 	is_dead = true
+	health_depleted.emit(self)
