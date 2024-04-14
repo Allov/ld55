@@ -1,11 +1,19 @@
 extends RigidBody2D
 class_name Plate
 
+var rng = RandomNumberGenerator.new()
 var ingredients = []
 var node_to_follow: Node2D = null
 var just_dropped = false
 var dropped_velocity = Vector2.ZERO
 var current_meal = ""
+var moveVector: Vector2
+var spawning_from_station = false
+
+func spawn_from_station(targetPos: Vector2, parent: Node):
+	parent.add_child(self)
+	moveVector = targetPos
+	spawning_from_station = true
 
 func add_ingredient(kind: String):
 	if ingredients.size() < 3 and not ingredients.has(kind):
@@ -54,3 +62,8 @@ func _integrate_forces(state):
 		state.apply_central_force(Vector2.ZERO)
 		state.apply_torque(0)
 		state.transform = node_to_follow.global_transform
+	
+	if spawning_from_station:
+		state.transform = Transform2D(0.0, moveVector)
+		state.apply_central_impulse(Vector2(rng.randf_range(-750.0, 750.0), rng.randf_range(-750.0, 750.0)))
+		spawning_from_station = false
