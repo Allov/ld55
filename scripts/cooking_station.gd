@@ -23,6 +23,8 @@ func cook(ingredient: Ingredient):
 		cooking_ingredient.cook()
 		cooking_ingredient.follow(self)
 
+		print("Cooking ingredient: ", cooking_ingredient)
+
 		if interaction_type == INTERACTION_TYPES.TIMER:
 			$Timer.one_shot = true
 			$Timer.start()
