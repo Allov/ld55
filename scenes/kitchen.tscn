@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c83c7gs5uxov5"]
+[gd_scene load_steps=11 format=3 uid="uid://c83c7gs5uxov5"]
 
 [ext_resource type="PackedScene" uid="uid://dbptqom5s0ss6" path="res://scenes/ingredient.tscn" id="1_g506r"]
 [ext_resource type="Texture2D" uid="uid://c20ftqptb2ie1" path="res://assets/ingredient_b.png" id="2_3m1d7"]
@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cahsr4ooxnf3e" path="res://assets/cooking_station_b.png" id="5_cl2gs"]
 [ext_resource type="Texture2D" uid="uid://b6nawrjt620yv" path="res://assets/cooking_station_c.png" id="6_5wowo"]
 [ext_resource type="PackedScene" uid="uid://35hhfhr26brw" path="res://scenes/plate.tscn" id="7_e4vjx"]
+[ext_resource type="Script" path="res://scripts/summoning-guard-station.gd" id="8_gme45"]
+[ext_resource type="Texture2D" uid="uid://fqi8u3441678" path="res://assets/summoning-spot.png" id="8_pp1jv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_koymp"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5vrl"]
+radius = 18.0278
 
 [node name="Kitchen" type="Node2D"]
 
@@ -63,18 +65,29 @@ texture = ExtResource("3_3js2c")
 [node name="Plate" parent="." instance=ExtResource("7_e4vjx")]
 position = Vector2(264, 176)
 
-[node name="SummoningSpot" type="Area2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(176, 0)
+[node name="SummonGuardArea" type="Area2D" parent="."]
+modulate = Color(0.329412, 0.588235, 0.686275, 1)
+position = Vector2(136, 16)
+collision_layer = 8
+script = ExtResource("8_gme45")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SummoningSpot"]
-position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_koymp")
+[node name="Sprite2D" type="Sprite2D" parent="SummonGuardArea"]
+texture = ExtResource("8_pp1jv")
 
-[node name="Label" type="Label" parent="SummoningSpot"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Summon"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummonGuardArea"]
+shape = SubResource("CircleShape2D_r5vrl")
+
+[node name="SummonMonsterArea" type="Area2D" parent="."]
+modulate = Color(0.454902, 0.345098, 0.164706, 1)
+position = Vector2(224, 16)
+collision_layer = 8
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SummonMonsterArea"]
+texture = ExtResource("8_pp1jv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummonMonsterArea"]
+shape = SubResource("CircleShape2D_r5vrl")
 
 [editable path="CookingStationB"]
 [editable path="CookingStationC"]
