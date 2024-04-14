@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var detection_area: Area2D
 @export_range(1, 10) var attack_delay: float = 2 
 # À changer
-@onready var player = get_node("/root/Fridge/Player")
+@onready var player = get_node("/root/Restaurant/Player")
 
 var timer;
 var can_shoot = false;

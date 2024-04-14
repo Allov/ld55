@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://c6djtlfpv5wcp" path="res://scenes/guards/default_guard.tscn" id="1_ggsk1"]
 [ext_resource type="Texture2D" uid="uid://xevj41aijxgi" path="res://scenes/guards/dog.png" id="2_0ts63"]
-[ext_resource type="PackedScene" uid="uid://cm4fc8vn2pg73" path="res://scenes/projectiles/projectile1.tscn" id="2_vlpg4"]
+[ext_resource type="PackedScene" uid="uid://cm4fc8vn2pg73" path="res://scenes/projectiles/projectile_ally.tscn" id="2_8xhd0"]
 
 [node name="Guard" instance=ExtResource("1_ggsk1")]
-projectile_scene = ExtResource("2_vlpg4")
+projectile_scene = ExtResource("2_8xhd0")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(-1.90735e-06, -2.32458e-06)

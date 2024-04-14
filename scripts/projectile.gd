@@ -34,7 +34,7 @@ func seek():
 	var steer = Vector2.ZERO
 	
 	if target != null:
-		var desired = (target.position - position).normalized() * speed
+		var desired = (target.global_position - global_position).normalized() * speed
 		steer = (desired - velocity).normalized() * steer_force
 
 	return steer
@@ -43,4 +43,5 @@ func _on_timeout_complete():
 	queue_free()
 
 func _on_hitbox_area_entered(_area):
-	queue_free()
+	if _area is Hurtbox:
+		queue_free()
