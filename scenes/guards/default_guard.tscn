@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://components/health.gd" id="3_aiym8"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="4_rukfq"]
 [ext_resource type="AudioStream" uid="uid://ccp6a7tnrb2p" path="res://assets/sfx/guard_spawn.wav" id="6_1ihlp"]
-[ext_resource type="AudioStream" uid="uid://b1v3cp730feco" path="res://assets/sfx/guard_die.wav" id="7_1rv6h"]
+[ext_resource type="AudioStream" uid="uid://ctq0rkl1yjyrh" path="res://assets/sfx/guard_die.wav" id="7_1rv6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wyab"]
 size = Vector2(133, 132)
@@ -53,10 +53,12 @@ wait_time = 2.0
 
 [node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_1ihlp")
+bus = &"SFX"
 
 [node name="DieAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_1rv6h")
 volume_db = -2.0
+bus = &"SFX"
 
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
