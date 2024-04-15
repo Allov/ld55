@@ -28,6 +28,7 @@ func _ready():
 	GameManager.set_player(self)
 
 func _process(_delta):
+	if GameManager.game_state == "game_over": return	
 	GameManager.current_cooking_station = cooking_station_in_range
 	var object_in_range = null
 	object_in_range = get_object_in_range()
@@ -139,6 +140,7 @@ func interact_with_object(object_in_range):
 			object_in_hand = null
 
 func _physics_process(delta):
+	if GameManager.game_state == "game_over": return
 	var current_direction = velocity.normalized()
 	var horizontal_direction = Input.get_axis("move_left", "move_right")
 	if horizontal_direction:

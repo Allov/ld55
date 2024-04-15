@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://mrvvcikcibes"]
+[gd_scene load_steps=13 format=3 uid="uid://mrvvcikcibes"]
 
 [ext_resource type="PackedScene" uid="uid://b4ck1ajh7elbm" path="res://scenes/player.tscn" id="1_55q5r"]
 [ext_resource type="TileSet" uid="uid://8626lmjwa768" path="res://assets/tileset.tres" id="1_mpkah"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dmatlvnbmdc7t" path="res://scenes/diningroom.tscn" id="4_vyinh"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="7_hof62"]
 [ext_resource type="PackedScene" uid="uid://bidbm7kwjwos0" path="res://scenes/ui.tscn" id="7_wu1om"]
-[ext_resource type="PackedScene" uid="uid://cm2ybxtl2whsq" path="res://assets/candle.tscn" id="9_o4y6x"]
+[ext_resource type="PackedScene" path="res://assets/candle.tscn" id="9_o4y6x"]
+[ext_resource type="PackedScene" uid="uid://bnbh73sg1p3ip" path="res://scenes/gameover.tscn" id="10_8og2l"]
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="11_8hw1v"]
 
 [sub_resource type="Environment" id="Environment_yrm4w"]
 background_mode = 3
@@ -130,3 +132,7 @@ position = Vector2(5, 155)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yrm4w")
+
+[node name="GameOver" parent="." instance=ExtResource("10_8og2l")]
+position = Vector2(428.441, 251.218)
+script = ExtResource("11_8hw1v")
