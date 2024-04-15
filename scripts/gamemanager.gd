@@ -52,6 +52,7 @@ func end_game():
 	print("Game over. Final score: ", score)
 
 func lose_life():
+	player.lose_life()
 	lives -= 1
 	print("Lives remaining: ", lives)
 	player_lost_live.emit()

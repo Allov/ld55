@@ -5,6 +5,8 @@ class_name SummoningGuardStation
 @export var guard_scene: PackedScene = null
 @export var progress_value: float = 0.5
 
+var invoke_audio_playing = false
+
 func toggle_indicator(value):
 	$Indicator.visible = value
 
@@ -25,6 +27,9 @@ func summon_guard():
 	var spawn_point = spawn_points[index]
 	guard.global_position = get_node(spawn_point).global_position
 	
+	$InvokeAudio.stop()
+	invoke_audio_playing = false
+	
 	GameManager.summon_points[index] = guard
 	
 	return true
@@ -36,19 +41,21 @@ func progress():
 	if $ProgressBar.value >= 1.0:
 		$ProgressBar.value = 0.0
 		summon_guard()
+	
+	if not invoke_audio_playing:
+		$InvokeAudio.play()
+		invoke_audio_playing = true
 
 func reset_progress():
 	$ProgressBar.visible = false
 	$ProgressBar.value = 0.0
+	$InvokeAudio.stop()
+	invoke_audio_playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(spawn_points.size()):
 		GameManager.summon_points[i] = null
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 func _free_summon_point(guard):
 	print("Guard died ", guard)
