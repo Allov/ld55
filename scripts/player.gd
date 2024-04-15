@@ -110,6 +110,7 @@ func pick_up_object(object_in_range):
 		print("Object picked up ", object_in_range)
 		object_in_hand = object_in_range
 		object_in_hand.follow(self)
+		$PickAudio.play()
 
 func interact_with_object(object_in_range):
 	# Check if the object in range is a Customer and the player is holding a plate.
@@ -161,6 +162,7 @@ func _physics_process(delta):
 		dash_timer = dash_duration
 	
 	if dash_cooldown > 0 and dash_timer > 0 and (vertical_direction or horizontal_direction):
+		$DashAudio.play()
 		dash_timer = dash_timer - delta
 		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY)
 		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY)
@@ -181,9 +183,14 @@ func _physics_process(delta):
 func clear_object_in_hand():
 	if object_in_hand != null:
 		object_in_hand.stop_following()
+		if velocity.length() > 0:
+			$ThrowAudio.play()
 
 	object_in_hand = null
-	
+
+func lose_life():
+	$HurtAudio.play()
+
 func _on_CookArea_body_entered(body):
 	if body is CookingStation:
 		cooking_station_in_range = body
@@ -198,6 +205,7 @@ func _on_CookArea_body_entered(body):
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
+		cooking_station_in_range.stop_audio_hold()
 		cooking_station_in_range = null
 		print("Not in range!")
 	elif body is PlateStation:

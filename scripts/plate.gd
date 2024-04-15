@@ -11,6 +11,9 @@ var current_meal = ""
 var moveVector: Vector2
 var spawning_from_station = false
 
+func _ready():
+	$SpawnAudio.play()
+
 func toggle_indicator(value):
 	$Indicator.visible = value
 
