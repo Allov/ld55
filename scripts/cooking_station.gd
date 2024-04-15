@@ -13,6 +13,9 @@ enum INTERACTION_TYPES {
 
 var cooking_ingredient: Ingredient = null
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func cook(ingredient: Ingredient):
 	if ingredient.kind != accepts:
 		print("Cannot cook this ingredient")
@@ -37,6 +40,7 @@ func _stop_cooking():
 	if cooking_ingredient != null:
 		cooking_ingredient.stop_cooking()
 		cooking_ingredient = null
+		GameManager.cooked_ingredients += 1
 
 func progress():
 	if cooking_ingredient == null:

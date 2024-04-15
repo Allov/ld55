@@ -19,10 +19,10 @@ colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 0)
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l56ht"]
-radius = 12.0
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
-radius = 11.0
+radius = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htfjs"]
 
@@ -99,6 +99,11 @@ collision_layer = 4
 collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_qmujo")
+MAX_SPEED = null
+ACCELERATION = null
+DASH_VELOCITY = null
+DASH_COOLDOWN = null
+dash_duration = null
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.47451)
@@ -126,6 +131,7 @@ collision_layer = 4
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+rotation = 1.39929e-05
 shape = SubResource("CircleShape2D_l56ht")
 
 [node name="CookArea" type="Area2D" parent="."]

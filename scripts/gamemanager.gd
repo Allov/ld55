@@ -16,6 +16,8 @@ var current_enemy: Enemy = null
 var summon_points = {}
 var player = null
 var restaurant = null
+var cooked_ingredients = 0
+var assembled_meal = 0
 
 func _input(event):
 	if event.is_action_pressed("pause_game"):
@@ -79,6 +81,17 @@ func set_restaurant(_restaurant: Node):
 
 func get_restaurant():
 	return restaurant
+	
+func summon_points_empty(min: int = 2):
+	var i = 0
+	for point in summon_points:
+		if summon_points[point] == null:
+			i += 1
+			if i > min:
+				return true
+	
+	return false
+
 
 func set_score(new_score: int):
 	score = new_score

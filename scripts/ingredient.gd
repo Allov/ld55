@@ -15,6 +15,9 @@ var meal = false
 var moveVector: Vector2
 var spawning_from_enemy = false
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func spawn_from_enemy(targetPos: Vector2, parent: Node):
 	parent.add_child(self)
 	moveVector = targetPos

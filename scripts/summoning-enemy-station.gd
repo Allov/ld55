@@ -5,6 +5,9 @@ class_name SummoningEnemyStation
 @export var enemy_scene: PackedScene = null
 @export var progress_value: float = 0.5
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func summon_enemy():
 	if GameManager.current_enemy != null:
 		return false
