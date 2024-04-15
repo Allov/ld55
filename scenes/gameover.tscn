@@ -1,3 +1,50 @@
-[gd_scene format=3 uid="uid://bnbh73sg1p3ip"]
+[gd_scene load_steps=3 format=3 uid="uid://bnbh73sg1p3ip"]
+
+[ext_resource type="FontFile" uid="uid://jhsuxvtummf3" path="res://assets/font/NewRocker-Regular.ttf" id="1_7mjwy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkiwl"]
+bg_color = Color(0.6, 0.6, 0.6, 0.184314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="GameOver" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 115
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.835294)
+offset_right = 384.0
+offset_bottom = 215.0
+color = Color(0.282353, 0, 0, 1)
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer"]
+offset_top = 50.0
+offset_right = 383.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("1_7mjwy")
+theme_override_font_sizes/font_size = 39
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_top = 108.0
+offset_right = 384.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("1_7mjwy")
+text = "Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CanvasLayer"]
+offset_left = 136.0
+offset_top = 163.0
+offset_right = 244.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("1_7mjwy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rkiwl")
+text = "Restart"

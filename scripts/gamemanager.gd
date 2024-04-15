@@ -23,6 +23,7 @@ func _input(event):
 
 func start_game():
 	score = 0
+	lives = 5
 	game_speed = 1.0
 	game_state = "playing"
 	print("Game started")
@@ -48,6 +49,9 @@ func resume_game():
 func end_game():
 	game_state = "game_over"
 	print("Game over. Final score: ", score)
+	var game_over_screen = get_tree().current_scene.get_node("GameOver")
+	game_over_screen.get_node("CanvasLayer/ScoreLabel").text = "Score: " + str(score)
+	game_over_screen.get_node("CanvasLayer").visible = true
 
 func lose_life():
 	lives -= 1
