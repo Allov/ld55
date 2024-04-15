@@ -2,9 +2,13 @@
 extends Node
 
 signal player_lost_live
+signal score_updated
+
+const SCORE_EASY = 50
+const SCORE_MEDIUM = 125
 
 var instance: GameManager
-var score: int = 0
+var score = 0
 var lives: int = 5
 var game_speed: float = 1.0
 var game_state: String = "playing" # trois options: "playing", "paused", "game_over"
@@ -54,9 +58,10 @@ func lose_life():
 	if lives <= 0:
 		end_game()
 
-func add_score(amount: int):
-	score += amount
-	print("Current score: ", score)
+func add_score(points : int) -> void:
+	score += points
+	print("Score updated: " + str(score))
+	emit_signal("score_updated")  # This line emits the signal to update the UI
 
 func update_game_speed():
 	if score > 100:
@@ -87,3 +92,7 @@ func summon_points_empty(min: int = 2):
 	
 	return false
 
+
+func set_score(new_score: int):
+	score = new_score
+	emit_signal("score_updated")

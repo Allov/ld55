@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://4p68qi7v46jv"]
+[gd_scene load_steps=11 format=3 uid="uid://4p68qi7v46jv"]
 
 [ext_resource type="Script" path="res://scripts/customer.gd" id="1_lu0dh"]
 [ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="1_mtt6d"]
 [ext_resource type="Texture2D" uid="uid://n4yrcu3884y8" path="res://assets/order_bubble.png" id="3_k57ty"]
+[ext_resource type="AudioStream" uid="uid://d1slxg2llgkht" path="res://assets/sfx/customer_spawn.wav" id="4_iwa04"]
+[ext_resource type="AudioStream" uid="uid://bkvu82idcn2qo" path="res://assets/sfx/customer_pay.wav" id="5_ud5mn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feahs"]
 radius = 16.0
@@ -101,4 +103,15 @@ libraries = {
 }
 autoplay = "pulse"
 
+[node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_iwa04")
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="PayAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ud5mn")
+volume_db = -5.0
+bus = &"SFX"
+
 [connection signal="timeout" from="PatienceTimer" to="." method="_on_patience_timer_timeout"]
+[connection signal="finished" from="PayAudio" to="." method="_on_pay_audio_finished"]

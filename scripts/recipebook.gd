@@ -38,12 +38,6 @@ var recipes = {
 		"difficulty": "medium", 
 		"sprite": "res://assets/meals/pink-red.png",
 		"name": "Pink and Red Meal"
-	},
-	"Cooked_A+Cooked_B+Cooked_C": {
-		"ingredients": ["Cooked_A", "Cooked_B", "Cooked_C"], 
-		"difficulty": "hard", 
-		"sprite": "res://assets/meals/green-pink-red.png",
-		"name": "Green + Pink + Red Meal"
 	}
 }
 

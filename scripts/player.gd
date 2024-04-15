@@ -24,6 +24,7 @@ func _ready():
 	$CookArea.connect("body_exited", _on_CookArea_body_exited)
 	$CookArea.connect("area_entered", _on_CookArea_area_entered)
 	$CookArea.connect("area_exited", _on_CookArea_area_exited)
+	$GrabArea.connect("body_entered", _GrabArea_body_entered)
 	GameManager.set_player(self)
 
 func _process(_delta):
@@ -46,6 +47,7 @@ func _process(_delta):
 				object_in_range.spawn_plate()
 			if object_in_range is Trash and object_in_hand != null:
 				object_in_hand.queue_free()
+				object_in_range.use()
 				object_in_hand = null
 			if object_in_hand == null:
 				pick_up_object(object_in_range)
@@ -221,3 +223,6 @@ func _on_CookArea_area_exited(area):
 	if area is SummoningEnemyStation:
 		area.reset_progress()
 		summoning_enemy_station_in_range = null
+
+func _GrabArea_body_entered(body):
+	print("Grab Area in range of " + body.name)

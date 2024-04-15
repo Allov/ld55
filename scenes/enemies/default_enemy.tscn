@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd8ldwyy5jgt5"]
+[gd_scene load_steps=10 format=3 uid="uid://dd8ldwyy5jgt5"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_037e2"]
-[ext_resource type="PackedScene" uid="uid://c8qonasjt8p0s" path="res://assets/poof.tscn" id="2_i5uib"]
+[ext_resource type="PackedScene" path="res://assets/poof.tscn" id="2_i5uib"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="3_3uvuk"]
 [ext_resource type="Script" path="res://components/health.gd" id="3_iblko"]
 [ext_resource type="Texture2D" uid="uid://cu58degfcb1jt" path="res://assets/monster_1.png" id="3_ln5w4"]
+[ext_resource type="AudioStream" uid="uid://bhs24vifg1f0j" path="res://assets/sfx/monster_spawn.mp3" id="6_7bh6h"]
+[ext_resource type="AudioStream" uid="uid://b7evsfh5lfiix" path="res://assets/sfx/monster_die.mp3" id="7_3vpr2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_puqex"]
 size = Vector2(32, 32)
@@ -49,4 +51,15 @@ shape = SubResource("CircleShape2D_jpgry")
 [node name="AttackDelay" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7bh6h")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="DieAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3vpr2")
+volume_db = -2.0
+bus = &"SFX"
+
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="finished" from="DieAudio" to="." method="_on_die_audio_finished"]
