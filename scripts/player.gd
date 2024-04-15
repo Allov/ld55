@@ -201,7 +201,7 @@ func _on_CookArea_body_exited(body):
 		cooking_station_in_range = null
 		print("Not in range!")
 	elif body is PlateStation:
-		cooking_station_in_range = null
+		plate_station_in_range = null
 	elif body is Trash:
 		thrash_in_range = null
 	if body is Customer:

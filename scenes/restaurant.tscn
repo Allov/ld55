@@ -85,6 +85,11 @@ position = Vector2(0, 216)
 
 [node name="Player" parent="." instance=ExtResource("1_55q5r")]
 position = Vector2(104, 54)
+MAX_SPEED = 200.0
+ACCELERATION = 10.0
+DASH_VELOCITY = 425.0
+DASH_COOLDOWN = 1.0
+dash_duration = 0.06
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.75, 0.75)

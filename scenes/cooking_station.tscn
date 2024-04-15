@@ -10,7 +10,6 @@ size = Vector2(55, 25)
 
 [node name="CookingStation" type="StaticBody2D" groups=["cooking_station"]]
 collision_layer = 8
-collision_mask = 9
 script = ExtResource("1_kbi6u")
 
 [node name="Sprite" type="Sprite2D" parent="."]
