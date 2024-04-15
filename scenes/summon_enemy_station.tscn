@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8ecdp4g5tyep"]
+[gd_scene load_steps=7 format=3 uid="uid://b8ecdp4g5tyep"]
 
 [ext_resource type="Script" path="res://scripts/summoning-enemy-station.gd" id="1_xwt3o"]
 [ext_resource type="PackedScene" uid="uid://c03o2t1nb3ls8" path="res://assets/progress_bar.tscn" id="3_uv8a3"]
