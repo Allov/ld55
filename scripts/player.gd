@@ -205,6 +205,7 @@ func _on_CookArea_body_entered(body):
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
+		cooking_station_in_range.stop_audio_hold()
 		cooking_station_in_range = null
 		print("Not in range!")
 	elif body is PlateStation:
