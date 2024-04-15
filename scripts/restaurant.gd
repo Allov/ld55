@@ -32,5 +32,10 @@ func update_debug_info():
 		var patience_level = patience_bar.value
 		patience_info += "Customer Patience: %.2f\n" % patience_level
 
-	var debug_text = "FPS: %s\nLives: %s\nScore: %s\nGame Speed: %s\nGame State: %s\nSpawn Timer: %.2f\n%s" % [fps, lives, score, game_speed, game_state, spawn_timer, patience_info]
+	# var debug_text = "FPS: %s\nLives: %s\nScore: %s\nGame Speed: %s\nGame State: %s\nSpawn Timer: %.2f\n%s" % [fps, lives, score, game_speed, game_state, spawn_timer, patience_info]
+	var debug_text = ""
+	if GameManager.current_cooking_station:
+		debug_text = "cooking station " + GameManager.current_cooking_station.name
+	
 	$DebugLayer/DebugLabel.text = debug_text
+	

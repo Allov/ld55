@@ -28,6 +28,7 @@ func _ready():
 	GameManager.set_player(self)
 
 func _process(_delta):
+	GameManager.current_cooking_station = cooking_station_in_range
 	var object_in_range = null
 	object_in_range = get_object_in_range()
 
@@ -194,7 +195,7 @@ func lose_life():
 func _on_CookArea_body_entered(body):
 	if body is CookingStation:
 		cooking_station_in_range = body
-		print("In range!")
+		print("In range: " + body.name)
 	elif body is PlateStation:
 		plate_station_in_range = body
 	elif body is Trash:
@@ -205,11 +206,11 @@ func _on_CookArea_body_entered(body):
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
+		print("Not in range : " + cooking_station_in_range.name)
 		cooking_station_in_range.stop_audio_hold()
 		cooking_station_in_range = null
-		print("Not in range!")
 	elif body is PlateStation:
-		cooking_station_in_range = null
+		plate_station_in_range = null
 	elif body is Trash:
 		thrash_in_range = null
 	if body is Customer:

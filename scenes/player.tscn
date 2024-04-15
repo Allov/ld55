@@ -26,7 +26,7 @@ radius = 7.0
 radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gglyw"]
-radius = 22.0
+radius = 12.0416
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_htfjs"]
 
