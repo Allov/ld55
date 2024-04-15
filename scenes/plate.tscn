@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://35hhfhr26brw"]
+[gd_scene load_steps=5 format=3 uid="uid://35hhfhr26brw"]
 
 [ext_resource type="Script" path="res://scripts/plate.gd" id="1_ii8y3"]
 [ext_resource type="Texture2D" uid="uid://bhvq2cdt6j5gy" path="res://assets/meals/empty-plate.png" id="2_epnn7"]
+[ext_resource type="AudioStream" uid="uid://c68fy6srycsi3" path="res://assets/sfx/plate_spawn.mp3" id="3_htlgs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3ic5"]
 size = Vector2(16, 16)
@@ -20,3 +21,8 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u3ic5")
+
+[node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_htlgs")
+volume_db = -5.0
+bus = &"SFX"

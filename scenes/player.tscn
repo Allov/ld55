@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4ck1ajh7elbm"]
+[gd_scene load_steps=20 format=3 uid="uid://b4ck1ajh7elbm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qmujo"]
 [ext_resource type="Texture2D" uid="uid://bqujgyr3aaqwj" path="res://assets/player.png" id="2_kghhj"]
 [ext_resource type="Texture2D" uid="uid://d2mt8s4xttpj7" path="res://assets/shadow.png" id="2_u5l8y"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="3_v62kt"]
 [ext_resource type="Texture2D" uid="uid://bn0uruyssni05" path="res://assets/action_key.png" id="5_a2goi"]
+[ext_resource type="AudioStream" uid="uid://dlh1chdkk6ls" path="res://assets/sfx/player_pick.mp3" id="6_hhhki"]
+[ext_resource type="AudioStream" uid="uid://bn3p1qacspxk4" path="res://assets/sfx/player_throw.mp3" id="7_qf4bi"]
+[ext_resource type="AudioStream" uid="uid://2bbet7ubjvk7" path="res://assets/sfx/player_dash.mp3" id="8_6cukd"]
+[ext_resource type="AudioStream" uid="uid://dyn8vsq28oyfi" path="res://assets/sfx/player_hurt.wav" id="9_r3i3w"]
 
 [sub_resource type="Curve" id="Curve_frggu"]
 max_value = 5.0
@@ -162,3 +166,23 @@ libraries = {
 "": SubResource("AnimationLibrary_1l6vf")
 }
 autoplay = "bounce"
+
+[node name="PickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_hhhki")
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="ThrowAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_qf4bi")
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="DashAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_6cukd")
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_r3i3w")
+volume_db = -1.0
+bus = &"SFX"
