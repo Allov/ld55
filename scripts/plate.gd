@@ -11,6 +11,12 @@ var current_meal = ""
 var moveVector: Vector2
 var spawning_from_station = false
 
+func _ready():
+	$SpawnAudio.play()
+
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func spawn_from_station(targetPos: Vector2, parent: Node):
 	parent.add_child(self)
 	moveVector = targetPos
@@ -32,6 +38,7 @@ func update_meal():
 	var meal_info = Recipebook.get_meal_info(ingredients)
 	if meal_info and meal_info.has("name"):
 		current_meal = meal_info["name"]
+		GameManager.assembled_meal += 1
 	else:
 		current_meal = "Unknown Meal"
 	print("Updated meal to: ", current_meal)

@@ -30,6 +30,7 @@ shape = SubResource("RectangleShape2D_puqex")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_iblko")
+max_health = 25
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 64
@@ -52,7 +53,7 @@ wait_time = 2.0
 
 [node name="SpawnAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7bh6h")
-volume_db = -5.0
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="DieAudio" type="AudioStreamPlayer2D" parent="."]

@@ -17,16 +17,19 @@ var customer_in_range: Customer = null
 var summoning_enemy_station_in_range: SummoningEnemyStation = null
 var plate_station_in_range: PlateStation = null
 var thrash_in_range: Trash = null
+var tracking_cooking_station = null
 
 func _ready():
 	$CookArea.connect("body_entered", _on_CookArea_body_entered)
 	$CookArea.connect("body_exited", _on_CookArea_body_exited)
 	$CookArea.connect("area_entered", _on_CookArea_area_entered)
 	$CookArea.connect("area_exited", _on_CookArea_area_exited)
+	$GrabArea.connect("body_entered", _GrabArea_body_entered)
 	GameManager.set_player(self)
 
 func _process(_delta):
 	if GameManager.game_state == "game_over": return	
+	GameManager.current_cooking_station = cooking_station_in_range
 	var object_in_range = null
 	object_in_range = get_object_in_range()
 
@@ -63,6 +66,21 @@ func _process(_delta):
 		object_in_range_interactable = object_in_hand == null or (object_in_hand is Ingredient and object_in_hand.cooked)
 	elif object_in_range:
 		object_in_range_interactable = true
+		
+	if object_in_hand is Ingredient and object_in_hand.cooked == false:
+		var cooking_stations = get_tree().get_nodes_in_group("cooking_station")
+		for station in cooking_stations:
+			if station.accepts == object_in_hand.kind:
+				station.toggle_indicator(true)
+				tracking_cooking_station = station
+	elif tracking_cooking_station != null:
+		tracking_cooking_station.toggle_indicator(false)
+	
+	var ping_plates = object_in_hand is Ingredient and object_in_hand.cooked == true
+	var plates = get_tree().get_nodes_in_group("plate")
+	for plate in plates:
+		plate.toggle_indicator(ping_plates)
+		
 
 	$ActionInRange.visible = object_in_range_interactable or summoning_enemy_station_in_range or summoning_guard_station_in_range
 	
@@ -94,6 +112,7 @@ func pick_up_object(object_in_range):
 		print("Object picked up ", object_in_range)
 		object_in_hand = object_in_range
 		object_in_hand.follow(self)
+		$PickAudio.play()
 
 func interact_with_object(object_in_range):
 	# Check if the object in range is a Customer and the player is holding a plate.
@@ -146,6 +165,7 @@ func _physics_process(delta):
 		dash_timer = dash_duration
 	
 	if dash_cooldown > 0 and dash_timer > 0 and (vertical_direction or horizontal_direction):
+		$DashAudio.play()
 		dash_timer = dash_timer - delta
 		velocity.x = move_toward(velocity.x, velocity.normalized().x * DASH_VELOCITY, DASH_VELOCITY)
 		velocity.y = move_toward(velocity.y, velocity.normalized().y * DASH_VELOCITY, DASH_VELOCITY)
@@ -166,13 +186,18 @@ func _physics_process(delta):
 func clear_object_in_hand():
 	if object_in_hand != null:
 		object_in_hand.stop_following()
+		if velocity.length() > 0:
+			$ThrowAudio.play()
 
 	object_in_hand = null
-	
+
+func lose_life():
+	$HurtAudio.play()
+
 func _on_CookArea_body_entered(body):
 	if body is CookingStation:
 		cooking_station_in_range = body
-		print("In range!")
+		print("In range: " + body.name)
 	elif body is PlateStation:
 		plate_station_in_range = body
 	elif body is Trash:
@@ -183,10 +208,11 @@ func _on_CookArea_body_entered(body):
 
 func _on_CookArea_body_exited(body):
 	if body is CookingStation:
+		print("Not in range : " + cooking_station_in_range.name)
+		cooking_station_in_range.stop_audio_hold()
 		cooking_station_in_range = null
-		print("Not in range!")
 	elif body is PlateStation:
-		cooking_station_in_range = null
+		plate_station_in_range = null
 	elif body is Trash:
 		thrash_in_range = null
 	if body is Customer:
@@ -208,3 +234,6 @@ func _on_CookArea_area_exited(area):
 	if area is SummoningEnemyStation:
 		area.reset_progress()
 		summoning_enemy_station_in_range = null
+
+func _GrabArea_body_entered(body):
+	print("Grab Area in range of " + body.name)

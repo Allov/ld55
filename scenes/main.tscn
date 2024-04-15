@@ -8,7 +8,7 @@
 script = ExtResource("1_0kq06")
 
 [node name="Boo" type="Sprite2D" parent="."]
-position = Vector2(194, 137)
+position = Vector2(192, 109)
 texture = ExtResource("1_u4v5w")
 
 [node name="Start" type="Button" parent="."]

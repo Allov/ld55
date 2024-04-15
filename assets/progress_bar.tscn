@@ -12,6 +12,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar"]
+z_index = 3
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0

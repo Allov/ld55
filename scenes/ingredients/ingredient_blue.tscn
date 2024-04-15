@@ -5,7 +5,7 @@
 
 [node name="Ingredient" instance=ExtResource("1_rj40f")]
 kind = "A"
-cooked_kind = "cooked_A"
+cooked_kind = "Cooked_A"
 
 [node name="Raw" parent="." index="0"]
 texture = ExtResource("2_nwpwj")

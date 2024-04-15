@@ -1,21 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://chen1l7qpby23"]
+[gd_scene load_steps=10 format=3 uid="uid://chen1l7qpby23"]
 
 [ext_resource type="Script" path="res://scripts/cooking_station.gd" id="1_kbi6u"]
 [ext_resource type="Texture2D" uid="uid://boeamx8m5l11o" path="res://assets/cooking_station_a.png" id="2_chwvh"]
-[ext_resource type="PackedScene" path="res://assets/progress_bar.tscn" id="3_cp3n4"]
+[ext_resource type="PackedScene" uid="uid://c03o2t1nb3ls8" path="res://assets/progress_bar.tscn" id="3_cp3n4"]
+[ext_resource type="PackedScene" uid="uid://bcst5fxa4s5xf" path="res://assets/indicator.tscn" id="4_bnx56"]
+[ext_resource type="AudioStream" uid="uid://cttl5608ja6vo" path="res://assets/sfx/cooking_squish.wav" id="5_kk27p"]
+[ext_resource type="AudioStream" uid="uid://p0dr0bbhgtmc" path="res://assets/sfx/cooking_ready.mp3" id="6_d5msj"]
+[ext_resource type="AudioStream" uid="uid://c02sinynw2ar0" path="res://assets/sfx/cooking_meat.wav" id="7_dpx0t"]
+[ext_resource type="AudioStream" uid="uid://ckcx6j7jq56pk" path="res://assets/sfx/cooking_knife.mp3" id="8_ia0wf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85h7n"]
-size = Vector2(16, 16)
+size = Vector2(55, 25)
 
-[node name="CookingStation" type="StaticBody2D"]
+[node name="CookingStation" type="StaticBody2D" groups=["cooking_station"]]
 collision_layer = 8
-collision_mask = 11
 script = ExtResource("1_kbi6u")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_chwvh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_85h7n")
 
 [node name="Timer" type="Timer" parent="."]
@@ -23,3 +28,26 @@ wait_time = 10.0
 one_shot = true
 
 [node name="ProgressBar" parent="." instance=ExtResource("3_cp3n4")]
+
+[node name="Indicator" parent="." instance=ExtResource("4_bnx56")]
+visible = false
+
+[node name="SquishAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kk27p")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="ReadyAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_d5msj")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="MeatAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_dpx0t")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="KnifeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ia0wf")
+volume_db = -10.0
+bus = &"SFX"
