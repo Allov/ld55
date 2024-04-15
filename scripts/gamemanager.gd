@@ -18,6 +18,7 @@ var player = null
 var restaurant = null
 var cooked_ingredients = 0
 var assembled_meal = 0
+var current_cooking_station = null
 
 func _input(event):
 	if event.is_action_pressed("pause_game"):
