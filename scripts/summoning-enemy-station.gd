@@ -7,6 +7,9 @@ class_name SummoningEnemyStation
 
 var invoke_audio_playing = false
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func summon_enemy():
 	if GameManager.current_enemy != null:
 		return false

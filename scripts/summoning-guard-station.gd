@@ -7,6 +7,9 @@ class_name SummoningGuardStation
 
 var invoke_audio_playing = false
 
+func toggle_indicator(value):
+	$Indicator.visible = value
+
 func summon_guard():
 	var index = -1
 	for point in GameManager.summon_points:

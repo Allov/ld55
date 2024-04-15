@@ -30,6 +30,7 @@ shape = SubResource("RectangleShape2D_puqex")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_iblko")
+max_health = 25
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 64

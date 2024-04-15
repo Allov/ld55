@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://scripts/plate.gd" id="1_ii8y3"]
 [ext_resource type="Texture2D" uid="uid://bhvq2cdt6j5gy" path="res://assets/meals/empty-plate.png" id="2_epnn7"]
 [ext_resource type="AudioStream" uid="uid://c68fy6srycsi3" path="res://assets/sfx/plate_spawn.mp3" id="3_htlgs"]
+[ext_resource type="PackedScene" uid="uid://bcst5fxa4s5xf" path="res://assets/indicator.tscn" id="3_8a4ko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3ic5"]
 size = Vector2(16, 16)
 
-[node name="Plate" type="RigidBody2D"]
+[node name="Plate" type="RigidBody2D" groups=["plate"]]
 collision_layer = 2
 collision_mask = 11
 linear_damp = 5.0
@@ -26,3 +27,6 @@ shape = SubResource("RectangleShape2D_u3ic5")
 stream = ExtResource("3_htlgs")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="Indicator" parent="." instance=ExtResource("3_8a4ko")]
+visible = false

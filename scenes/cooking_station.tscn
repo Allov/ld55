@@ -1,21 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://chen1l7qpby23"]
+[gd_scene load_steps=6 format=3 uid="uid://chen1l7qpby23"]
 
 [ext_resource type="Script" path="res://scripts/cooking_station.gd" id="1_kbi6u"]
 [ext_resource type="Texture2D" uid="uid://boeamx8m5l11o" path="res://assets/cooking_station_a.png" id="2_chwvh"]
 [ext_resource type="PackedScene" uid="uid://c03o2t1nb3ls8" path="res://assets/progress_bar.tscn" id="3_cp3n4"]
+[ext_resource type="PackedScene" uid="uid://bcst5fxa4s5xf" path="res://assets/indicator.tscn" id="4_bnx56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85h7n"]
-size = Vector2(16, 16)
+size = Vector2(55, 25)
 
-[node name="CookingStation" type="StaticBody2D"]
+[node name="CookingStation" type="StaticBody2D" groups=["cooking_station"]]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 9
 script = ExtResource("1_kbi6u")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_chwvh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_85h7n")
 
 [node name="Timer" type="Timer" parent="."]
@@ -23,3 +25,6 @@ wait_time = 10.0
 one_shot = true
 
 [node name="ProgressBar" parent="." instance=ExtResource("3_cp3n4")]
+
+[node name="Indicator" parent="." instance=ExtResource("4_bnx56")]
+visible = false
